@@ -1,0 +1,171 @@
+<div class="home-top">
+  <h1 class="home-header-1">
+     {{$Label.Orgs_Website}} {{$Label.Main}}
+  </h1>
+  <div class="home-top-background" [style.background-image]="backgroundImgUrl">
+    <div class="home-top-search-container">
+      <form novalidate [formGroup]="searchForm" role="application">
+      <div class="home-search-bar">
+        <app-auto-complete 
+            class="home-search-autocomplete"
+            [remoteAction]="'GSTAR_Ctrl.searchMalkarsAC'" 
+            [fontSize]="'18px'"
+            [rightOffset]="'1em'"
+            [allowExtValue]="false"
+            [parentFormGroup]="searchForm"
+            [controlName]="searchWordControlName"
+            [showSelection]="false"
+            [illegalSearchRegex]="illegalSearchRegex"
+            (onSelect)="searchItemSelected($event)"
+            >
+          <input  type="search" 
+                  autocomplete="off"
+                  [placeholder]="$Label.Home_search_placeholder" 
+                  class="home-search-input mobile-hide" 
+                  [attr.aria-label]="$Label.Home_search_aria" 
+                  [formControlName]="searchWordControlName"
+                  (keydown.enter)="searchClicked()"
+                  >
+          <input  type="search" 
+                  autocomplete="off"
+                  [placeholder]="$Label.Enter_search_term" 
+                  class="home-search-input mobile-show" 
+                  [attr.aria-label]="$Label.Enter_search_aria" 
+                  [formControlName]="searchWordControlName"
+                  (keydown.enter)="searchClicked()"
+                  >
+        </app-auto-complete>
+        <div class="home-search-picklist mobile-hide">
+          <app-multi-picklist
+                            [title]="$Label.Classifications"
+                            [fieldName]="mainClassifications.apiName"
+                            [picklistItems]="mainClassifications.options"
+                            [hideBorders]="true"
+                            [fontSize]="'0.75em'"
+                            [maxHeight]="'13.5em'"
+                            [titleHeight]="'2.85em'"
+                            [parentFormGroup]="searchForm"
+                            [controlName]="mainClassifications.apiName"
+                            [placeHolderColor]="'#627883'"
+                            [tightArrow]="true"
+                            >
+        </app-multi-picklist>
+            <!--<input type="text" [placeholder]="$Label.Classifications" class="home-search-input" [attr.aria-label]="$Label.Classifications">-->
+        </div>
+        <div class="home-search-button" (keydown.enter)="searchClicked()" (click)="searchClicked()" tabindex="0" [attr.aria-label]="$Label.Search_aria" role="button">
+          <!--<i class="fa fa-search search-icon"></i>-->
+          <img class="search-icon" [src]="getBackgroundImageUrl(iconSearch)" [alt]="$Label.Search_icon_alt" aria-hidden="true"/>
+        </div>
+      </div>
+      </form>
+    </div>
+    <div class="home-top-info" *ngIf="reportTotals && reportTotals.DataMap && reportTotals.DataMap.GuidestarHomePageImportant && reportTotals.DataMap.GuidestarHomePageImportant.Data">
+      <div class="home-top-text" [innerHtml]="$Label.Homepage_explain_text">
+      </div>
+      <div class="home-totals-container">
+        <div 
+          *ngFor="let item of reportTotals.DataMap.GuidestarHomePageImportant.Data; let i = index;"
+          class="home-total-display home-total-display-desktop"
+          appCounto
+          [step]="30"
+          [countTo]="item.Amount"
+          [countFrom]="0"
+          [duration]="1.5"
+          (countoChange)="countoParams[i] = $event">
+            <div>
+              {{countoParams[i] | number:'1.0-0'}} 
+              <span *ngIf="item.CurrencyType">{{item.CurrencyType}}</span>
+            </div>
+            <span class="home-totals-label">
+              {{ $Label[item.MainLabel] }}
+            </span>
+        </div>
+      </div>
+
+      <div class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div 
+            *ngFor="let item of reportTotals.DataMap.GuidestarHomePageImportant.Data; let i = index; let first=first;"
+            [ngClass]="{'home-total-display': true, 'carousel-item': true, 'active': first}"
+            appCounto
+            [step]="30"
+            [countTo]="item.Amount"
+            [countFrom]="0"
+            [duration]="1.5"
+            (countoChange)="countoParams[i] = $event"
+            (countoEnd)="countoFinished()">
+              {{countoParams[i] | number:'1.0-0'}}
+              <span *ngIf="item.CurrencyType">{{item.CurrencyType}}</span>
+              <div class="home-totals-label">
+                {{ $Label[item.MainLabel] }}
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="home-middle">
+  <h2 class="home-section-title">
+    {{$Label.Search_orgs_count}}
+  </h2>
+  <ul [@expandCollapse]="popularSearchState" class="home-middle-content-wrapper" *ngIf="reportTotals && reportTotals.DataMap && reportTotals.DataMap.GuidestarHomePageSearch && reportTotals.DataMap.GuidestarHomePageSearch.Data">
+    <li *ngFor="let item of reportTotals.DataMap.GuidestarHomePageSearch.Data" class="home-popular-searches">
+      <span class="home-popular-search-item"  (keydown.enter)="popularSearchClicked(item)" (click)="popularSearchClicked(item)" tabindex="0" role="link">
+        {{ $Label[item.MainLabel] }}
+        <span class="home-popular-search-amount">
+          &nbsp;  ({{item.Amount | number}})
+        </span>
+      </span>
+    </li>
+  </ul>
+  <div class="home-section-expander" (click)="toggleExpandView()">
+    <div class="home-section-expander-button home-expand-button" *ngIf="popularSearchState === 'collapsed'" tabindex="0" (keydown.Enter)="toggleExpandView()">
+      {{$Label.More}}
+    </div>
+    <div class="home-section-expander-button home-collapse-button" *ngIf="popularSearchState === 'expanded'" tabindex="0" (keydown.Enter)="toggleExpandView()">
+      {{$Label.Less}}
+    </div>
+  </div>
+</div>
+<div class="home-bottom">
+  <h2 class="home-section-title">
+    {{$Label.General_info}}
+    <img class="home-graph-switcher" #chartActiveIcon *ngIf="!graphShowList" (click)="showChartClicked($event, false)" (keydown.enter)="toggleShowChart(false)" [src]="getBackgroundImageUrl(iconShowChart)" [alt]="$Label.Toggle_Graph_Chart" tabindex="0" role="application"/>
+    <img class="home-graph-switcher" #listActiveIcon *ngIf="graphShowList" (click)="showChartClicked($event, true)" (keydown.enter)="toggleShowChart(true)" [src]="getBackgroundImageUrl(iconShowList)" [alt]="$Label.Toggle_Graph_Chart" tabindex="0" role="application"/>
+    <div class="screenreader-only" aria-atomic="true" role="option" aria-live="polite">
+      <div class="screenreader-only" *ngIf="!graphShowList">{{$Label.Display_Chart}}</div>
+      <div class="screenreader-only" *ngIf="graphShowList">{{$Label.Display_List}}</div>
+    </div>
+  </h2>
+  <div class="home-bottom-content-wrapper">
+    <div class="home-chart-wrapper">
+        <div class="home-chart-title">
+          <i class="home-chart-title-bar">&nbsp;|&nbsp;</i>
+          <div>{{$Label.Orgs_by_activity}}</div>
+          <app-info-icon [label]="$Label.Tooltip_Orgs_by_activity" [position]="'right'"></app-info-icon>
+        </div>
+      <app-chart-pie class="home-chart" [items]="homeClassifications" [seeAllLegend]="false" [showTotalInLegend]="true" [showLargeButton]="true" [bucketSum]="5" [sumStyle]="{'font-weight' : 'bold', 'font-size' : '1.25em'}">         
+      </app-chart-pie>
+    </div>
+    <div class="home-chart-wrapper">
+        <div class="home-chart-title">
+          <i class="home-chart-title-bar">&nbsp;|&nbsp;</i>
+          <div>{{$Label.Orgs_by_area}}</div>
+          <app-info-icon [label]="$Label.Tooltip_Orgs_by_area" [position]="'right'"></app-info-icon>
+        </div>    
+      <app-chart-pie class="home-chart" [showTotal]="false" [showBlankTotal]="true" [items]="homeDistricts" [bucketSum]="1" [bucketHidden]="true" [seeAllLegend]="false" [showTotalInLegend]="false" [showLargeButton]="true" [sumStyle]="{'font-weight' : 'bold', 'font-size' : '1.25em'}"> 
+      </app-chart-pie>
+    </div>
+    <div class="home-chart-wrapper">
+        <div class="home-chart-title">
+          <i class="home-chart-title-bar">&nbsp;|&nbsp;</i>
+          <div>{{$Label.Orgs_by_support}}</div>
+          <app-info-icon [label]="$Label.Tooltip_Orgs_by_support" [position]="'right'"></app-info-icon>
+        </div>    
+      <app-chart-pie class="home-chart" [items]="homeTmihot" [seeAllLegend]="false" [showTotalInLegend]="true" [showLargeButton]="true" [currency]="'₪'" [bucketSum]="2" [sumStyle]="{'font-weight' : 'bold', 'font-size' : '1.25em'}">         
+      </app-chart-pie>
+    </div>
+  </div>
+</div>

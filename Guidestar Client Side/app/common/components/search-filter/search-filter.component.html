@@ -1,0 +1,120 @@
+<form novalidate [formGroup]="filterForm" role="application" [attr.aria-label]="$Label.Search_filter_text">
+<section id="searchFilters" role="form">
+  <div class="search-filter-tab" #searchFilterHeader [ngStyle]="{'display': !showFilter ? 'block' : 'none'}" (click)="toggleFilter()" #searchFilterTab>
+    <img class="filter-icon" [src]="getBackgroundImageUrl(iconFilter)" [alt]="$Label.Filter_icon_alt" aria-hidden="true"/>
+  </div>
+<div class="search-filter-container" #searchFilterContainer [ngStyle]="{'display': showFilter ? 'block' : 'none'}">
+  <div class="search-filter-header" (click)="toggleFilter()">  
+    <div class="search-filter-title" role="heading" aria-level="4" >
+      <div class="search-filter-img" >
+        <img class="filter-icon" [src]="getBackgroundImageUrl(iconFilter)" [alt]="$Label.Filter_icon_alt" aria-hidden="true"/>
+      </div>
+      {{filterConfig.title}}
+    </div>
+    <div class="search-filter-close" >
+      <!--<i class="fa fa-times" aria-hidden="true"></i>-->
+      <img [src]="getBackgroundImageUrl(iconClose)" >
+    </div>
+    <div class="search-filter-vert-divider"></div>
+    <div tabindex="0" class="search-filter-reset" (click)="resetForm()" (keydown.enter)="resetForm()">
+      {{filterConfig.reset}}
+    </div>
+  </div>
+  <div class="mobile-show mobile-spacer">
+    <div class="mobile-spacer-item">
+      <div class="search-filter-vert-divider-mobile"></div>
+      <div tabindex="0" class="search-filter-reset-mobile" (click)="resetForm()" (keydown.enter)="resetForm()">
+        {{filterConfig.reset}}
+      </div>
+    </div>
+    <div class="mobile-spacer-item">
+      <div class="search-filter-vert-divider-mobile"></div>
+      <div tabindex="0" class="search-filter-reset-mobile" (click)="toggleFilter()" (keydown.enter)="toggleFilter()">
+        {{$Label.Okay}}
+      </div>
+    </div>
+  </div>
+  <!--<div style="direction: ltr">{{filterForm.value | json}}</div>  -->
+  <fieldset class="search-filter-checkboxes search-mobile-small" *ngIf="checkboxList && checkboxList.length > 0">
+    <div class="search-filter-checkbox" *ngFor="let checkboxItem of checkboxList; trackBy: trackByFunc; let i = index;">
+      <app-checkbox 
+                    [fieldName]="checkboxItem.apiName"
+                    [label]="checkboxItem.label" 
+                    [chckbxId]="'searchFilterChckbx'+i" 
+                    [tooltip]="checkboxItem.tooltip" 
+                    [tooltipPosition]="'top'"
+                    [isChecked]="checkboxItem.isChecked"
+                    [controlName]="checkboxItem.apiName"
+                    [parentFormGroup]="filterForm"
+                    >
+      </app-checkbox>
+    </div>
+  </fieldset>
+  <fieldset class="search-filter-sliders search-mobile-small" *ngIf="sliderList && sliderList.length > 0">
+    <div class="search-filter-slider" *ngFor="let sliderItem of sliderList; trackBy: trackByFunc; let i = index;">
+      <legend class="search-filter-slider-label" role="heading">
+        {{sliderItem.label}}
+        <app-info-icon *ngIf="sliderItem.tooltip" [label]="sliderItem.tooltip" [position]="'top'"></app-info-icon>
+      </legend>
+      <app-double-slider  
+                          [minValue]="sliderItem.min" 
+                          [maxValue]="sliderItem.max"
+                          [labelValues]="sliderItem.labelValues" 
+                          [rangeValues]="sliderItem.rangeValues" 
+                          [sliderId] = "'doubleSlider' + i"
+                          [controlName]="sliderItem.apiName"
+                          [parentFormGroup]="filterForm"
+                          [lowValue]="doubleSliderValues && doubleSliderValues[i] && doubleSliderValues[i][0] ? doubleSliderValues[i][0] : ''"
+                          [highValue]="doubleSliderValues && doubleSliderValues[i] && doubleSliderValues[i][1] ? doubleSliderValues[i][1] : ''"
+                          [attr.aria-labelled-by]="sliderItem.label">
+      </app-double-slider>
+    </div>
+  </fieldset>
+  <fieldset class="search-filter-dropdowns search-mobile-small" *ngIf="dropdownList && dropdownList.length > 0">
+    <div *ngFor="let dropdownItem of dropdownList; trackBy: trackByFunc;">
+      <div class="search-filter-dropdown" *ngIf="!dropdownItem.hidden">
+        <app-multi-picklist #dropdownComponent
+                            [title]="dropdownItem.label"
+                            [maxHeight]="'16em'"
+                            [fieldName]="dropdownItem.apiName"
+                            [picklistItems]="dropdownItem.options"
+                            [parentFormGroup]="filterForm"
+                            [controlName]="dropdownItem.apiName"
+                            >
+        </app-multi-picklist>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset *ngIf="searchBoxList && searchBoxList.length > 0">
+    <div class="search-filter-text-input-container search-mobile-small" *ngFor="let textItem of searchBoxList; trackBy: trackByFunc; let i = index;">
+      
+      <app-auto-complete 
+              #autoCompleteBoxes
+              [remoteAction]="textItem.functionFullName" 
+              [maxHeight]="'10em'"
+              [fontSize]="'1em'"
+              [allowExtValue]="false"
+              [parentFormGroup]="filterForm"
+              [controlName]="textItem.apiName"
+              [reverseFunction]="textItem.functionReverseFullName"
+              [posRelative]="true"
+              [illegalSearchRegex]="illegalSearchRegex"
+              [initialValue]="filterForm && filterForm.controls[textItem.apiName] && filterForm.controls[textItem.apiName].value ? filterForm.controls[textItem.apiName].value : null"
+              (showToggled)="scrollToEndOfFilter($event)"
+              >
+          <input 
+            type="text" 
+            autocomplete="off"
+            [attr.name]="textItem.apiName" 
+            [placeholder]="textItem.label" 
+            [attr.aria-label]="textItem.label"
+            class="search-filter-text-input" 
+            (focus)="scrollToEndOfFilter(null)"
+            >
+      </app-auto-complete>
+    </div>
+  </fieldset>
+  <!--<div style="direction: ltr">{{filterForm.value | json}}</div>-->
+</div>
+</section>
+</form>

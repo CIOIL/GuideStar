@@ -1,0 +1,72 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+h3, h4, h5, h6{
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+.malkar-services-container{
+  width: 75%;
+}
+
+.malkar-services-content{
+  padding: 0 1.125em 0 0;
+}
+.malkar-services-table-heading{
+  font-size: 1.125em;
+  font-weight: bold;
+  padding: 0.375em 1em 0.375em 0.5em;
+  color: $background-color;
+  background-color: $malkar-services-heading-bg-color;
+  border-bottom: 2px solid $malkar-services-heading-border-color;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.malkar-services-table-list-heading{
+  font-size: 1.125em;
+  font-weight: bold;
+  padding: 0.5em 0.75em 0.5em 0;
+  color: $malkar-services-heading-bg-color;
+  // border-bottom: 2px solid $malkar-services-heading-border-color;
+}
+
+.malkar-services-tables{
+  margin: 1.5em 0 0 0;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-services-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 40.063em){
+  h2{
+    display: none;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .malkar-services-container{
+    width: 100%;
+  }
+  .malkar-services-content{
+    padding: 0.5em 0 0 0;
+  }
+  .malkar-services-chevron{
+    display: none;
+  }
+  .malkar-service-tive-heading{
+    flex: 1;
+  }
+}

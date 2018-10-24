@@ -1,0 +1,32 @@
+<div *ngIf="malkar; else loadingContent" >
+  <h1 class="malkar-detail-heading">
+    <div class="malkar-detail-title">
+      {{malkar.Name}} <i class="malkar-detail-heading-divider">&nbsp;|&nbsp;</i> 
+        {{malkar.sugHitagdut}}
+    </div>
+    <div class="malkar-detail-logo-container">
+      <div class="malkar-detail-logo">
+        <img *ngIf="malkar.logoUrl" [src]="malkar.logoUrl" [attr.aria-label]="$Label.Logo_of + ' ' + malkar.Name" />
+        <div *ngIf="!malkar.logoUrl" class="logo-placeholder"></div>
+      </div>
+    </div>
+  </h1>
+  <div class="malkar-detail-content-container">
+    <div class="malkar-detail-menu-container">
+      <app-malkar-menu
+                      [menuItemHideMap]="malkar.InactiveMenu"
+                      [malkarNum]="malkarNum"
+      >
+      </app-malkar-menu>
+    </div>
+    <div class="malkar-detail-data-container desktop-show">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<div class="mobile-show">
+  <app-malkar-menu-mobile [menuItemHideMap]="malkar.InactiveMenu" [malkarNum]="malkarNum"></app-malkar-menu-mobile>
+</div>
+
+
+<ng-template #loadingContent>loading...</ng-template>

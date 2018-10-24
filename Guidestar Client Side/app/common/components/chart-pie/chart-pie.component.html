@@ -1,0 +1,61 @@
+<!--<div [ngStyle]="{'display': showList ? 'none' : 'block'}">-->
+<div #chartDisplay [hidden]="showList">
+  <div class="chart-wrapper" (mouseleave)="hideTooltip()">
+    <div *ngIf="showTotal && total" class="app-chart-pie-total" [ngStyle]="sumStyle ? sumStyle : ''">
+      {{total | number : '1.0-0'}}
+      <span *ngIf="currency">{{currency}}</span>
+    </div>
+    <div *ngIf="!showTotal && showBlankTotal" class="app-chart-pie-total" [ngStyle]="sumStyle ? sumStyle : ''">
+        &nbsp;
+      <span *ngIf="currency">{{currency}}</span>
+    </div>
+    <div class="chart-tooltip-wrapper">
+      <canvas #donut width="100%" [height]="chartHeight"></canvas>
+      <div #tooltipParent id="chartjs-tooltip">
+          <div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-legend" *ngIf="legendData">
+    <long-text [minHeight]="minHeightLegend" [seeAll]="seeAllLegend" [showLargeButton]="showLargeButton" [showSmallButton]="showSmallButton">
+      <ul class="app-chart-pie-legend-container">
+        <li class="app-chart-pie-legend-item" 
+          *ngFor="let legendItem of legendData">
+    <!--<app-info-icon [icoInfo]="''" [label]="'???'">-->
+          <span class="app-chart-pie-legend-bullet" [ngStyle]="{'background-color': legendItem.fillStyle}" [attr.aria-label]="getTitle(legendItem)"></span>
+          {{legendItem.text}} <small *ngIf="showLegendInfo">{{getTitle(legendItem)}}</small>
+      <!--</app-info-icon>                    -->
+        </li>
+      </ul>
+    </long-text>
+  </div>  
+</div>
+<!--<div [ngStyle]="{'display': showList ? 'block' : 'none'}">-->
+<div #listDisplay [hidden]="!showList" [style.height]="chartRectHeight" class="app-chart-list-wrapper">
+  <div *ngIf="showTotal && total" class="app-chart-pie-total" [ngStyle]="sumStyle ? sumStyle : ''">
+    {{total | number : '1.0-0'}}
+    <span *ngIf="currency">{{currency}}</span>
+  </div>
+  <div *ngIf="!showTotal && showBlankTotal" class="app-chart-pie-total" [ngStyle]="sumStyle ? sumStyle : ''">
+      &nbsp;
+    <span *ngIf="currency">{{currency}}</span>
+  </div>
+  <div class="chart-pie-table-table" role="table" aria-readonly="true">
+    <div class="chart-pie-table-title">
+    </div>
+    <div class="chart-pie-table-heading" role="row">
+      <div class="chart-pie-table-cell" role="columnheader">
+      </div>
+      <div class="chart-pie-table-cell" role="columnheader">
+      </div>
+    </div>
+    <div class="chart-pie-table-row" role="row" *ngFor="let label of labels; let i=index;">
+      <div class="chart-pie-table-cell" role="gridcell">
+          {{label}}
+      </div>
+      <div class="chart-pie-table-cell" role="gridcell">
+          {{data[0].data[i] | number:'1.0-0'}}
+      </div>
+    </div>
+  </div>
+</div>

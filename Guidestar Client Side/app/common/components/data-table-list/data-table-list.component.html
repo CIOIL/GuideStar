@@ -1,0 +1,64 @@
+<div class="table-list" *ngIf="tableList && tableList.length > 0">
+  <app-data-table *ngFor="let item of tableList; trackBy: trackByFunc; let first=first;" 
+                  [tableData]="item"
+                  [hideSum]="hideSum"
+                  [normalSum]="normalSum"
+                  [headerStyle]="headerStyle"
+                  [titleSeparator]="titleSeparator"
+                  [labelSeparator]="labelSeparator"
+                  [isFile]="isFile"
+                  [headerLevel]="headerLevel"
+                  [ariaLevel]="ariaLevel"
+                  [state]="item == expandTable || (first && !expandTable) ? 'expanded' : 'collapsed'"
+                  [isCollapsed]="item == expandTable || (first && !expandTable)"
+                  [nullTitle]="nullTitle">
+  </app-data-table>
+</div>
+<div class="table-mobile-view" *ngIf="tableList && tableList.length > 0">
+  <!--<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" 
+            type="button" 
+            id="dropdownMenuButton" 
+            data-toggle="dropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false">
+            {{selectedTable.Label}}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" >
+      <a class="dropdown-item" *ngFor="let item of tableList; trackBy: trackByFunc;" (click)="tableSelected(item)">
+        {{item.Label}}
+      </a>
+    </div>
+  </div>-->
+  <div class="table-mobile-picklist">
+    <app-picklist
+        [valueList]="tableNames"
+        [placeholder]="$Label.Choose"
+        [notShowPlaceHolderOption]="true"
+        [selectStyle]="{'font-weight': 'bold',  'border-color': '#3eabaf', 'background-color': '#f3f7f7', 'color': '#098289'}"
+        [parentFormGroup]="tableForm"
+        [controlName]="'tableName'"
+        [nullLabel]="nullTitle"
+        (onSelect)="tableSelected($event)">
+    </app-picklist>
+  </div>
+  <div class="table-mobile-sum-container" *ngIf="!hideSum" [ngStyle]="getTotalStyle()">
+    <div>
+      {{$Label.Total}}
+    </div>
+    <div *ngIf="selectedTable">
+      {{selectedTable.Sum | number : '1.0-0'}} ₪
+    </div>
+  </div>
+  <app-data-table 
+                  [tableData]="selectedTable" 
+                  [titleSeparator]="titleSeparator"
+                  [labelSeparator]="labelSeparator"
+                  [hideSum]="hideSum"
+                  [normalSum]="normalSum"
+                  [headerStyle]="headerStyle"
+                  [rowStyle]="rowStyle"
+                  [isFile]="isFile"
+                  [state]="expanded">
+  </app-data-table>
+</div>

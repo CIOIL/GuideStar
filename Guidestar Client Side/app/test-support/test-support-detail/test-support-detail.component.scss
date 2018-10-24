@@ -1,0 +1,150 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 24px;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  padding: 0 0 0.25em 0;
+  margin-left: 5em;
+}
+
+.ts-mobile-organ-type{
+  display: none;
+}
+
+.ts-content-container{
+  display: flex;
+  flex-flow: row wrap;
+  margin: 1.5em 0.625em 0 0;  
+}
+.ts-main-content{
+  flex: 3;
+  margin: 0 0 0 2.5em;
+}
+.ts-content-section{
+  margin: 0.5em 0 0.75em 8em;
+}
+.ts-link-container{
+  border-bottom: 1px solid $test-support-solid-border-color;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  position: relative;
+}
+.ts-link{
+  border: 1px solid $test-support-download-border-color;
+  height: 1.875em;
+  padding: 0.125em 0.125em 0 0.5em;
+  // margin: 0 0 0 2em;
+  box-sizing: border-box;
+  position: relative;
+  bottom: -1px;
+}
+.ts-link a:hover, .ts-link a:focus{
+  text-decoration: none;
+  border-color: $link-hover-color;
+  background-color: $test-support-link-hover-background-color;
+  outline: none;
+}
+.ts-link:hover, .ts-link:focus{
+  border-color: $link-hover-color;
+  background-color: $test-support-link-hover-background-color;
+  outline: none;
+}
+.linker-icon{
+  width: 24px;
+  height: 24px;
+}
+.ts-side-content-container{
+  flex: 1;
+}
+.ts-side-header{
+  background-color: $contact-left-title-background-color;
+  font-size: 18px;
+  font-weight: bold;
+  color: $background-color;
+  padding: 0.2em 0.75em 0.3125em 0;
+  margin: 0.25em 0 0.5em 0;
+}
+.ts-side-office{
+  font-weight: bold;
+  padding: 0 1em 0.875em 0;
+  margin: 0.75em 0 0 0;
+  border-bottom: 1px solid $test-support-solid-border-color;  
+}
+ul{
+  list-style: none;
+}
+li{
+  text-indent: -0.6em;
+}
+li::before{
+  content: '• ';
+  color: $test-support-bullet-color;
+}
+.ts-linked-test{
+  margin: 0 0 0.875em 0;
+  padding: 0.75em 1em 0 0;
+  border-top: 1px dashed $test-support-dashed-border-color;
+  color: $link-color;
+  cursor: pointer;
+}
+.ts-linked-test:first-child{
+  border-top: none;
+}
+.ts-linked-test:hover, .ts-linked-test:focus{
+  color: $link-hover-color;
+}
+.ts-side-none{
+  padding: 0 1em 0 0;
+}
+.ts-side-button-container{
+  border-bottom: 1px solid $test-support-solid-border-color;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  margin: 1em 0 0 0;
+}
+.ts-side-button{
+  padding: 0.2em 1em 0.3em 1em;
+  text-align: center;
+  background-color: $search-result-item-button-color;
+  color: $background-color; 
+  font-weight: bold;
+  cursor: pointer;
+}
+.ts-side-button:hover, .ts-side-button:focus{
+  background-color: $link-hover-color;
+  border-bottom: 0.2em solid $blue-button-underline-color;
+  padding-bottom: 0.1em;
+}
+@media only screen and (max-width: 40.0625em){
+  h2{
+    margin-left: 0;
+  }
+  .ts-mobile-organ-type{
+    display: block;
+    font-size: 18px;
+  }
+  .ts-content-container{
+    flex-direction: column;
+    margin: 0 0 1em 0;
+  }
+  .ts-main-content{
+    margin: 0.75em;
+  }
+  .ts-content-section{
+    margin: 0.5em 0 1em 0;    
+  }
+  .ts-side-content-container{
+    display: none;
+  }
+  .ts-organ-type{
+    display: none;
+  }
+  .linker-icon{
+    width: auto;
+    height: auto;
+    margin: auto;
+  }
+}

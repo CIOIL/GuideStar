@@ -1,0 +1,133 @@
+@import "../../../../assets/scss/params.scss";
+
+:host{ 
+    display: block; 
+}
+#chartjs-tooltip{
+    display:none;
+    line-height: 20px;
+    border-radius: 3px;
+    padding: 12px;
+    white-space: nowrap;
+    background-color: #627883;
+    position: absolute;
+    color: #ffffff;
+    padding: 0.5em 0.5em 0.2em 0.5em !important;
+    text-align: center;
+    z-index: 500;
+    cursor: default;
+}
+.chart-wrapper{
+  position: relative;
+  /*cursor: pointer;*/
+}
+.chart-tooltip-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-legend{
+  margin: 0.75em 1em 0 1em;
+}
+
+.app-chart-pie-legend-item small{
+    margin: auto;
+}
+
+.app-chart-pie-total{
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 1.1em;
+}
+.app-chart-pie-legend-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-grow: 1;
+}
+.app-chart-pie-legend-item{
+    padding: 0.4em;
+    list-style-type: none; 
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.app-chart-pie-legend-bullet{
+    width: 1em;
+    height: 1em;
+    margin: auto;
+    margin-inline-end: 0.4em;
+    border-radius: 50%;
+}
+
+.chart-pie-table-table{
+  display: table;
+  width: 100%;  
+  margin: auto;
+}
+.chart-pie-table-title{
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+}
+.chart-pie-table-heading{
+  display: table-header-group;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+.chart-pie-table-row{
+  display: table-row;
+  margin: auto;
+  // display: flex;
+  // flex-flow: row nowrap;
+  // justify-content: space-between;
+}
+.chart-pie-table-row:nth-child(odd){
+  background-color: $chart-list-odd-bg-color;
+}
+.chart-pie-table-row:nth-child(even){
+  background-color: $chart-list-even-bg-color;
+}
+.chart-pie-table-cell{
+  display: table-cell;
+  padding: 0.5em;
+  margin: auto;
+  border-bottom: 1px solid $background-color;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1420px){
+
+  #chartjs-tooltip{
+    top: initial !important;
+    left: initial !important;
+    text-align: center;
+    z-index: 2;
+  }
+
+}
+@media only screen and (max-width: 641px){
+  #chartjs-tooltip{
+    /*top: 45% !important;*/
+    /*left: 25% !important;*/
+    /*width: 170px;*/
+    top: initial !important;
+    left: initial !important;
+    /*position: static !important;*/
+    /*margin: auto !important;*/
+    /*width: fit-content !important;*/
+    /*height: fit-content !important;*/
+    white-space: normal;
+    text-align: center;
+    z-index: 2;
+  }
+  .chart-legend{
+    margin: 0.25em 0 0 0;
+    font-size: 0.9em;
+  }
+  .app-chart-list-wrapper{
+    padding: 0 0.5em 0 0;
+  }
+}

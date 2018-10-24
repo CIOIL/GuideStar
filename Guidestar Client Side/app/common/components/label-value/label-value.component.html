@@ -1,0 +1,11 @@
+<div class="label-value-container" [ngStyle]="customStyle">
+  <span [attr.role]="ariaLevel ? 'heading' : null" [attr.aria-level]="ariaLevel" [ngClass]="getLabelClasses()">{{label}}</span><!--
+  --><span [ngClass]="getSeparatorClass()">{{separator}} </span>
+  <span [ngClass]="getValueClasses()" *ngIf="!isCurrency && !isNumber && !isEmail && !isDate">{{value}}</span><!--
+  --><span [ngClass]="getValueClasses()" *ngIf="isCurrency && !isNumber && !isEmail && !isDate">{{value | number}} ₪</span><!--
+  --><span [ngClass]="getValueClasses()" *ngIf="!isCurrency && isNumber && !isEmail && !isDate">{{value | number}}</span><!--
+  --><span [ngClass]="getValueClasses()" *ngIf="!isCurrency && !isNumber && isEmail && !isDate"><a  [href]="'mailto:' + value">{{value}}</a></span><!--
+  --><span [ngClass]="getValueClasses()" *ngIf="!isCurrency && !isNumber && !isEmail && isDate">{{value | date:'dd/MM/yyyy'}}</span><!--
+  --><span *ngIf="addendum"> ({{addendum}})</span><!--
+  --><span *ngIf="tooltip"><app-info-icon  [label]="tooltip" [position]="tooltipPosition"></app-info-icon></span>
+</div>

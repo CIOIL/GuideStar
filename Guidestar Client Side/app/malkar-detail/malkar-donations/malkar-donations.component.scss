@@ -1,0 +1,67 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+h3{
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $malkar-info-h3-color;
+  margin-top: 0.75em;
+}
+.h3-vertical-bar{
+  display: none;
+}
+
+.malkar-donations-container{
+  width: 75%;
+}
+
+.malkar-donations-content{
+  padding: 0 1.125em 0 0;
+}
+
+.malkar-donations-tables{
+  margin: 1.5em 0 0 0;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-donations-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 40.063em){
+  h2{
+    display: none;
+  }
+  h3{
+    // border-right: 4px solid $malkar-detail-heading-divider-color;
+    // padding-right: 0.5em;
+    // margin-top: 0.75em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    font-size: 1em;
+  }
+  .h3-vertical-bar{
+    display: inline;
+    color: $home-charts-title-divider-color; 
+    font-style: normal;
+    font-size: 0.727272em;
+    padding: 0.25em 0 0 0;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .malkar-donations-container{
+    width: 100%;
+  }
+  .malkar-donations-content{
+    padding: 0.5em 0 0 0;
+  }
+}

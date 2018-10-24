@@ -1,0 +1,33 @@
+<span class="info-icon-container" tabindex="0"  (focus)="toggleTooltip($event)" (blur)="hideTooltip($event)">
+  <img 
+        *ngIf="icoInfo" 
+        class="info-icon-icon" 
+        [src]="getBackgroundImageUrl(icoInfo)" 
+        [attr.alt]="$Label.Info_icon_alt" 
+        data-toggle="tooltip" 
+        data-html="true" 
+        [title]="label"
+        aria-atomic="true" 
+        aria-live="polite"
+        [attr.aria-label]="label"/>
+  <ng-content></ng-content>
+</span>
+
+<!--<div 
+      class="info-icon-container" 
+      tabindex="0"
+      (mouseover)="activatePopover($event)" 
+      (mouseout)="deactivatePopover($event)" 
+      (focus)="togglePopover($event)"
+      (blur)="deactivatePopover($event)"
+      (click)="togglePopover($event)"
+      [attr.aria-labelledby]="label"
+      aria-atomic="true" 
+      aria-live="polite"
+      role="note">
+  <div [ngClass]="getLabelClass()" role="definition" >
+    {{label}}
+  </div>
+  <img *ngIf="icoInfo" class="info-icon-icon" [src]="getBackgroundImageUrl(icoInfo)" [attr.alt]="$Label.Info_icon_alt"/>
+  <ng-content></ng-content>
+</div>-->

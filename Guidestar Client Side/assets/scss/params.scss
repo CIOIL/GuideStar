@@ -1,0 +1,129 @@
+$menu-background-color: #098289;
+$menu-text-hover-color:#bde7e8;
+$menu-text-current-color: #e2f4e4;
+$menu-border-side-color: #7babb1;
+$menu-border-bottom-color: #89d395;
+$submenu-text-color: #d1eeef;
+$submenu-border-side-color: #75a1a6;
+
+$header-background-color: #eef4f4;
+$header-border-bottom-color: #aec8ca;
+$header-logo-divider-color: #adb9be;
+$header-subtitle-color: #1f3f4e;
+
+$accessibility-popover-border-color: #b9d0d2;
+
+$footer-bg-color: #eef6fa;
+$footer-border-color: #aec8ca;
+$footer-copyright-color: #405c68;
+$footer-items-divider-color: #aec8ca;
+
+$h1-border-color: #3288b3;
+$h4-color: #004a6d;
+$h2-color: #167bad ;
+$search-green: #29ab3e;
+$link-color: #167bad;
+$link-hover-color: #266583;
+$font-color: #1f3f4e;
+$background-color: #ffffff;
+$box-shadow-color: #888888;
+$box-shadow-settings: 0 2px 2px #888888;
+$input-focus-color: #f1fafe;
+$page-content-width: 1260px;
+$long-text-underline-color: #95d7d8;
+$blue-button-underline-color: #a2d7ee;
+
+$home-top-border-bottom-color: #aec8ca;
+$home-about-text-color: #1f3f4e;
+$home-totals-text-color: #098289;
+$home-totals-category-color: #266583;
+$home-section-title-color: #098289;
+$home-section-border-color: #89d395;
+$home-pop-searches-numbers-color: #2f2f2f;
+$home-charts-title-color: #266583;
+$home-charts-title-divider-color: #adb9be;
+$home-search-border-color: #29ab3e;
+$home-search-font-color: #627883;
+
+$table-header-font-color: $menu-background-color;
+$table-header-border-color: #3eabaf;
+$table-header-background-hover-color: #f4fbfb;
+$table-row-border-color: #cededf;
+$table-collapse-arrows-color: #539bbf;
+$table-header-mobile-bg: #3288b3; //link color
+$table-mobile-pulldown-bg: #f3f7f7;
+$table-mobile-pulldown-text-color: $menu-background-color;
+$table-mobile-pulldown-border-color: $table-header-border-color;
+$table-mobile-pulldown-arrow-color: #2e959b;
+
+$double-slider-color-inactive: #798c95;
+$double-slider-color-active: $search-green;//#29ab3e;
+$double-slider-handle-color: $table-mobile-pulldown-arrow-color;//#2e959b;
+$double-slider-color-background: #ffffff;
+
+$search-filter-title-divider-color: #b1bcc1 ;
+$search-filter-unchecked-border-color: #5d9196  ;
+$search-filter-checked-background-color: $table-mobile-pulldown-arrow-color;//#2e959b ;
+$search-filter-horizontal-dash-color: $header-border-bottom-color;//#aec8ca  ;
+
+$multi-picklist-default-border-color: $table-header-border-color;//#3eabaf  ;
+$multi-picklist-arrow-color: $table-mobile-pulldown-arrow-color;//#2e959b ;
+$multi-picklist-selected-border-color: #46c8cc  ;
+$multi-picklist-item-selected-num-color: $table-mobile-pulldown-arrow-color;//#2e959b ;
+$multi-picklist-item-selected-border-color: $multi-picklist-selected-border-color;//#46c8cc  ;
+$multi-picklist-item-hover-bg-color: #f1faf2 ;
+
+$multi-picklist-reset-color: #627883;
+$multi-picklist-reset-hover-color: #167bad;
+
+$auto-complete-background-hover-color: #f1faf2;
+$auto-complete-border-color: #aec8ca;
+$auto-complete-separator-color: #cededf;
+$auto-complete-title-color: #627883;
+
+$search-result-item-border-color: #cededf;
+$search-result-item-button-color: #167bad;
+
+$search-sort-border-color: #bfdae6;
+$search-sort-background-color: #eef6fa;
+
+$malkar-detail-heading-divider-color: #adb9be;
+$malkar-detail-menu-item-color: #266583;
+$malkar-detail-menu-item-hover-bg-color: #eef6fa;
+$malkar-detail-menu-item-active-bg-color: #e7f7f7;
+$malkar-detail-menu-item-current-bg-color: #167bad;
+$malkar-detail-menu-item-border-color: #aec8ca;
+
+$malkar-info-h2-color: #266583;
+$malkar-info-h2-border-color: #3288b3;
+$malkar-info-h3-color: #29ab3e;
+
+$malkar-services-heading-bg-color: #098289;
+$malkar-services-heading-border-color: #3eabaf;
+
+$malkar-people-expand-button-hover-color: #18636a;
+
+$contact-submit-button-background-color: #098289;
+$contact-submit-button-corner-color: #d8eeef;
+$contact-submit-button-background-hover-color: #18636a;
+$contact-submit-button-corner-hover-color: #95d7d8;
+$contact-required-field-color: #e4100b;
+$contact-left-title-background-color: #266583;
+$contact-input-border-color: #798c95;
+$contact-error-border-color: #9e0424;
+$contact-success-border-color: #1b9200;
+
+$test-support-download-border-color: #167bad;
+$test-support-solid-border-color: #cededf;
+$test-support-dashed-border-color: #aec8ca;
+$test-support-bullet-color: #098289;
+$test-support-link-hover-background-color: #f7f9fa;
+
+$chart-list-odd-bg-color: #dfeff3;
+$chart-list-even-bg-color: #f4f4f4;
+
+$export-excel-button-border-color: #29ab3e;
+$export-excel-button-hover-border-color: #1a922d;
+$export-excel-button-hover-background-color: #f6fcf8;
+$export-modal-border-color: #74cb82;
+$export-modal-header-background-color: #0c821f;

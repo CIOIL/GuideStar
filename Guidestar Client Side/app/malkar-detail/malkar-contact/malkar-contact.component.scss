@@ -1,0 +1,156 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+h3{
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $malkar-info-h3-color;
+}
+a{
+  font-weight: normal;
+}
+agm-map {
+  height: 300px;
+}
+.h3-vertical-bar{
+  display: none;
+}
+
+.malkar-contact-container{
+  width: 100%;
+}
+.malkar-contact-content-container{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.malkar-contact-content{
+  margin: 0 0 0 2.5em;
+  flex:3;  
+}
+.malkar-contact-content-wrapper{
+  padding: 0 1.125em 0 0;
+}
+.malkar-contact-section{
+  padding: 1em 0 1em 0;
+}
+.malkar-contact-info{
+  display: flex;
+  flex-flow: column wrap;
+}
+.malkar-contact-detail{
+  vertical-align: middle;
+  margin: 0 0.3em 0 0;
+}
+.malkar-contact-phone-wrapper, .malkar-contact-phone-num-wrapper{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.malkar-contact-phone{
+  border-left: 2px solid $contact-input-border-color;
+  padding: 0 0.5em 0 0.5em;
+}
+.malkar-contact-detail:last-child{
+  border-left: none;
+}
+.malkar-contact-web{
+  display: flex;
+  flex-flow: row wrap;
+}
+.malkar-contact-web-2{
+  margin: 0 0.5em 0 0;
+}
+.malkar-contact-web a{
+  margin-left: 2em;
+}
+.malkar-content-external-link{
+  margin: 1em 0 0 2em;
+}
+.media-icon{
+  height: 2em;
+}
+
+.malkar-contact-side{
+  flex:1;
+  min-width: 12.5em;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  .malkar-contact-side{
+    min-width: auto;
+    width: 12.5em;
+  }
+}
+
+@media only screen and (max-width: 641px){
+  h2{
+    display: none;
+  }
+  h3{
+    // border-right: 4px solid $malkar-detail-heading-divider-color;
+    // padding-right: 0.5em;
+    // margin-top: 0.75em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    font-size: 1em;
+    margin: 0;
+  }
+  .h3-vertical-bar{
+    display: inline;
+    color: $home-charts-title-divider-color; 
+    font-style: normal;
+    font-size: 0.727272em;
+    padding: 0.25em 0 0 0;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .media-icon{
+    height: 1.5em;
+  }
+  .malkar-contact-content-wrapper{
+    padding: 0.5em 0 0 0;
+  }
+  .malkar-contact-content{
+    margin: 0 0 0 1.125em;
+  }
+  .malkar-contact-section{
+    padding: 0.25em 0.5em 0.5em 0;
+  }
+  .malkar-contact-content-container{
+    flex-direction: column;
+  }
+  .malkar-contact-phone-wrapper{
+    align-items: flex-start;
+  }
+  .malkar-contact-phone-container{
+    flex-direction: column;
+  }
+  .malkar-contact-phone-wrapper img{
+    padding: 0.3em 0 0 0;
+  }
+  .malkar-contact-phone-num-wrapper{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .malkar-contact-phone{
+    border: none;
+    margin: 0.25em 0.25em 0 0.25em;
+    padding-top: 0.125em;
+    // display: block;    
+  }
+  .malkar-contact-web{
+    flex-direction: column;
+  }
+  .malkar-contact-side h3{
+    margin: 0.5em 0 0.5em 0;
+  }
+}

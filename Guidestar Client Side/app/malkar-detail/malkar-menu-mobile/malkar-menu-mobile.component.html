@@ -1,0 +1,123 @@
+<div class="malkar-menu-mobile malkar-menu-container" role="menu" >
+  <div *ngIf="!showMap[malkarPages.info].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.info].show}"
+        id="info" 
+        (click)="menuClicked($event, malkarPages.info)" 
+        (keydown.Enter)="enterHit($event, malkarPages.info)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Malkar_Info}}
+  </div>
+  <div *ngIf="showMap[malkarPages.info] && showMap[malkarPages.info].show" class="malkar-mobile-display">
+    <app-malkar-info></app-malkar-info>
+  </div>
+  <div *ngIf="!showMap[malkarPages.documents].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.documents].show}"
+        id="documents" 
+        (click)="menuClicked($event, malkarPages.documents)" 
+        (keydown.Enter)="enterHit($event, malkarPages.documents)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Documents_and_Reports}}
+  </div>
+  <div *ngIf="showMap[malkarPages.documents] && showMap[malkarPages.documents].show" class="malkar-mobile-display">
+    <app-malkar-documents></app-malkar-documents>
+  </div>
+  <div *ngIf="!showMap[malkarPages.people].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.people].show}" 
+        id="people" 
+        (click)="menuClicked($event, malkarPages.people)" 
+        (keydown.Enter)="enterHit($event, malkarPages.people)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Malkar_people}}
+  </div>
+  <div *ngIf="showMap[malkarPages.people] && showMap[malkarPages.people].show" class="malkar-mobile-display">
+    <app-malkar-people></app-malkar-people>
+  </div>
+  <div *ngIf="!showMap[malkarPages.govsupport].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.govsupport].show}"
+        id="govSupport" 
+        (click)="menuClicked($event, malkarPages.govsupport)" 
+        (keydown.Enter)="enterHit($event, malkarPages.govsupport)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Government_Support}}
+  </div>
+  <div *ngIf="showMap[malkarPages.govsupport] && showMap[malkarPages.govsupport].show" class="malkar-mobile-display">
+    <app-malkar-gov-support></app-malkar-gov-support>
+  </div>
+  <div *ngIf="!showMap[malkarPages.donations].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.donations].show}" 
+        id="donations" 
+        (click)="menuClicked($event, malkarPages.donations)" 
+        (keydown.Enter)="enterHit($event, malkarPages.donations)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Donations}}
+  </div>
+  <div *ngIf="showMap[malkarPages.donations] && showMap[malkarPages.donations].show" class="malkar-mobile-display">
+    <app-malkar-donations></app-malkar-donations>
+  </div>
+  <div *ngIf="!showMap[malkarPages.govservices].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.govservices].show}" 
+        id="govServices" 
+        (click)="menuClicked($event, malkarPages.govservices)" 
+        (keydown.Enter)="enterHit($event, malkarPages.govservices)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Services}}
+  </div>
+  <div *ngIf="showMap[malkarPages.govservices] && showMap[malkarPages.govservices].show" class="malkar-mobile-display">
+    <app-malkar-gov-services></app-malkar-gov-services>
+  </div> 
+  <div *ngIf="!showMap[malkarPages.volunteering].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.volunteering].show}" 
+        id="volunteering" 
+        (click)="menuClicked($event, malkarPages.volunteering)" 
+        (keydown.Enter)="enterHit($event, malkarPages.volunteering)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Volunteering}}
+  </div>
+  <div *ngIf="showMap[malkarPages.volunteering] && showMap[malkarPages.volunteering].show" class="malkar-mobile-display">
+    <app-malkar-volunteering></app-malkar-volunteering>
+  </div>  
+  <div *ngIf="!showMap[malkarPages.contact].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.contact].show}" 
+        id="contact" 
+        (click)="menuClicked($event, malkarPages.contact)" 
+        (keydown.Enter)="enterHit($event, malkarPages.contact)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Contact_us}}
+  </div>
+  <div *ngIf="showMap[malkarPages.contact] && showMap[malkarPages.contact].show" class="malkar-mobile-display">
+    <app-malkar-contact></app-malkar-contact>
+  </div>
+
+  <div *ngIf="!showMap[malkarPages.assets].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.assets].show}" 
+        id="assets" 
+        (click)="menuClicked($event, malkarPages.assets)" 
+        (keydown.Enter)="enterHit($event, malkarPages.assets)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Assets}}
+  </div>
+  <div *ngIf="showMap[malkarPages.assets] && showMap[malkarPages.assets].show" class="malkar-mobile-display">
+    <app-malkar-assets></app-malkar-assets>
+  </div>
+  <div *ngIf="!showMap[malkarPages.trustees].isHidden"
+        [ngClass]="{'malkar-menu-item': true, 'malkar-menu-item-active': showMap[malkarPages.trustees].show}" 
+        id="trustees" 
+        (click)="menuClicked($event, malkarPages.trustees)" 
+        (keydown.Enter)="enterHit($event, malkarPages.trustees)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Trustees}}
+  </div>
+  <div *ngIf="showMap[malkarPages.trustees] && showMap[malkarPages.trustees].show" class="malkar-mobile-display">
+    <app-malkar-trustees></app-malkar-trustees>
+  </div>
+</div>

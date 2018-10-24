@@ -1,0 +1,9 @@
+<div *ngIf="content">
+  <h2 class="main-content-h2" *ngIf="!hideTitle">{{content.H1}}</h2>
+  <div class="main-content" [ngStyle]="getStyle()">
+    <div #mainContent [innerHtml]="contentBody | safeHtml"></div>
+  </div>
+  <!--<div class="main-content" [ngStyle]="getStyle()">
+    <div #mainContent></div>
+  </div>-->
+</div>

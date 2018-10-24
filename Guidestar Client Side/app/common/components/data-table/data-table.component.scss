@@ -1,0 +1,85 @@
+@import "../../../../assets/scss/params.scss";
+
+h3, h4, h5, h6{
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+.table-header-title, .table-header-amount{
+  padding: 0.75em 1em 0.75em 0;
+}
+.table-header-row{
+  color: $table-header-font-color;
+  font-weight: bold;
+  border-top: 2px solid $table-header-border-color;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  cursor: pointer;
+  min-height: 0.75em;
+}
+.table-header-row:hover, .table-header-row:focus{
+  background-color: $table-header-background-hover-color;
+  outline: none;
+}
+.table-left-align{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-content: flex-start;
+  flex-grow: 1;
+}
+.table-header-caret{
+  padding: 0.75em 1em 0.75em 1em;
+}
+.table-data{
+  overflow: hidden;
+}
+.table-data-row{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  min-height: 2.875em;
+  border-bottom: 1px solid $table-row-border-color;
+}
+.table-data-label{
+  padding: 0.75em 1em 0.75em 7em;
+}
+.table-data-main-label{
+  font-weight: bold;
+}
+.table-data-amount{
+  padding: 0.75em 1em 0.75em 0;
+}
+.table-row-caret{
+  visibility: hidden;
+  padding: 0 1em 0 1em;
+}
+.table-data-row:last-child{
+  border-bottom: none;
+}
+.table-data-amount{
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 40.063em){
+  .table-container{
+    padding: 0 0.4em 0 0;
+    font-size: 1em;
+  }
+  .table-row-caret{
+    display: none;
+  }
+
+  .table-header-row{
+    display: none;
+  } 
+  .table-data-row{
+    align-items: center;
+    min-height: 2em;
+  }
+  .table-data-label{
+    padding: 0;
+  }
+}

@@ -1,0 +1,91 @@
+<apex:page applyBodyTag="false" standardStylesheets="false" applyHtmlTag="false" language="iw_IL" 
+            docType="html-5.0" showHeader="false" sidebar="false" 
+            controller="GSTAR_Ctrl" extensions="Utils_RemoteAction,GSTAR_Ctrl_Config,GSTAR_Ctrl_Meta">
+
+<html>
+    <head>
+        <!-- Google Tag Manager -->
+            <script>
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-NP6C3L8');
+            </script>
+        <!-- End Google Tag Manager -->
+        
+        <meta name="google-site-verification" content="F9QFyu2E6T_EY-KduSMTzDvBEQwmRUm3QVjnlWIpDtI" />
+        <meta charset="UTF-8"></meta>
+        <base href="/"></base> 
+        <link rel="canonical" href="{!canonicalUrl}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="{!description}"/>
+        <link rel="icon" type="image/x-icon" href="{!IF(favicon == '', URLFOR($Resource.GSTAR_ALL) + '/favicon.ico', favicon)}"/>
+        <title>{!title}</title>
+        
+        <meta property="og:url" content="{!canonicalUrl}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{!title}" />
+        <meta property="og:description" content="{!description}" />
+        <meta property="og:image" content="{!$Site.BaseUrl}{!URLFOR($Resource.GSTAR_ALL)}/assets/img/logo-guidestar-facebook.jpg" />
+        <meta name="twitter:title" content="{!title}" />
+        <meta name="twitter:description" content="{!description}" />
+        <meta name="twitter:image" content="{!$Site.BaseUrl}{!URLFOR($Resource.GSTAR_ALL)}/assets/img/logo-guidestar-facebook.jpg" />
+        
+        <meta name="guidestar:hasProperManagement" content="{!hasProperManagement}" />
+        <!-- 
+        <link rel="stylesheet" type="text/css" href="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/styles.bundle.css" />
+         -->
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.GSTAR_ALL, 'assets/scss/app-loader-styles.css')}"/>
+        
+        <link rel="stylesheet" type="text/css" href="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/styles.css" />
+        
+    </head>
+
+    <body>
+    
+    <!-- url : {!originalUrl}
+    <br/>
+    canonicalUrl : {!canonicalUrl}
+    <br/>
+    title : {!title}
+    <br/>
+    description : {!description} -->
+    
+        <!-- Google Tag Manager (noscript) -->
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP6C3L8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        
+        <apex:pageBlock >
+        <c:GSTAR_Label />
+            <script>
+                const userProfile  = {id:'{!$Profile.Id}', name:'{!$User.Username}'};
+                window.baseUrlAssets = "{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}";
+            </script>
+            <div class="wrap">
+                <app-root>
+                    <div class="app-loading">
+                        <div class="logo">
+                            <apex:image value="{!URLFOR($Resource.GSTAR_ALL, 'assets/img/symbol.png')}"/>
+                        </div>
+                        <svg class="spinner" viewBox="25 25 50 50">
+                            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                        </svg>
+                    </div>
+                    <apex:image html-class="logo-text" value="{!URLFOR($Resource.GSTAR_ALL, 'assets/img/logo-text.png')}"/>
+                </app-root>
+            </div>
+            
+            <script type="text/javascript" src="{!URLFOR($Resource.GSTAR_ALL, 'runtime.js')}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.GSTAR_ALL, 'polyfills.js')}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.GSTAR_ALL, 'scripts.js')}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.GSTAR_ALL, 'main.js')}"></script>
+            <!-- 
+            <script type="text/javascript" src="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/inline.bundle.js"></script>
+            <script type="text/javascript" src="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/polyfills.bundle.js"></script>
+            <script type="text/javascript" src="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/scripts.bundle.js"></script>
+            <script type="text/javascript" src="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_VENDOR, 'https://localhost:4200'))}/vendor.bundle.js"></script>
+            <script type="text/javascript" src="{!URLFOR(IF(ISNULL($CurrentPage.Parameters.dev), $Resource.GSTAR_ALL, 'https://localhost:4200'))}/main.bundle.js"></script>
+             -->
+        </apex:pageBlock>
+    </body>
+</html>
+</apex:page>

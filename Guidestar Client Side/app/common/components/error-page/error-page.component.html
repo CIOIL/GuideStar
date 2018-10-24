@@ -1,0 +1,30 @@
+<!--<div class="error-page-container">
+  <h1>Ya dun goofed</h1>
+  <div class="error-message-content">
+    Something went wrong and the page you are looking for could not be found
+  </div>
+  <div class="error-message-content">
+    Redirecting to home in {{countDown | async}} seconds
+  </div>
+  <div class="error-message-content">
+    To redirect now click <a [routerLink]="['/', 'home']" aria-label="home">here</a>
+  </div>
+</div>-->
+
+<div *ngIf="mainContent">
+  <h1 class="main-heading">{{$Label.Error_H1}}</h1>
+  <div class="error-content">
+    <div class="error-main-content">
+      <app-main-content *ngFor="let content of mainContent; let first=first;" [content]="content" [hideTitle]="first"></app-main-content>
+      <div class="error-countdown">
+        {{$Label.Redirecting_home}} {{countDown | async}} {{$Label.seconds}}
+      </div>
+      <div class="error-countdown">
+        <a style="font-weight: bold" [routerLink]="['/', 'home']" aria-label="home">{{$Label.Redirect_now}}</a>
+      </div>
+    </div>
+    <div class="contact-side-panel">
+      <app-side-content *ngFor="let content of sideContent" [content]="content"></app-side-content>
+    </div> 
+  </div>
+</div>

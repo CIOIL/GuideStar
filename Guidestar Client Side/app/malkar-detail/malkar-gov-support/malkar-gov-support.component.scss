@@ -1,0 +1,73 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+
+h3{
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $malkar-info-h3-color;
+}
+
+.h3-vertical-bar{
+  display: none;
+}
+
+.malkar-support-container{
+  width: 75%;
+}
+
+// .malkar-support-content{
+//   padding: 0 1.125em 0 0;
+// }
+
+.malkar-support-data-container{
+  padding: 0 1.125em 2em 0;
+} 
+
+.malkar-support-tables{
+  margin: 1.5em 0 0 0;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-support-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 641px){
+  h2{
+    display: none;
+  }
+  h3{
+    position: relative;
+    font-size: 1em;
+    padding: 0.5em 0 0 0;
+  }
+  .h3-vertical-bar{
+    display: inline;
+    color: $home-charts-title-divider-color; 
+    font-style: normal;
+    font-size: 0.727272em;
+    padding: 0.5em 0 0 0;
+    position: relative;
+    top: -3px;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .malkar-support-container{
+    width: 100%;
+  }
+  .malkar-support-data-container{
+    padding: 0 0 1em 0;
+  } 
+  .malkar-support-content{
+    padding: 0 0.5em 0 0;
+  }
+}

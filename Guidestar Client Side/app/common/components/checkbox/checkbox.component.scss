@@ -1,0 +1,48 @@
+@import "../../../../assets/scss/params.scss";
+
+.checkbox-container, .checkbox-wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+input[type="checkbox"]{
+  opacity: 0;
+  position: relative;
+}
+input[type="checkbox"] + label{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+}
+input[type="checkbox"] + label .checkbox-box{
+  position: relative;
+  right: 0;
+  top: 0.1875em;
+  display: inline-block;
+  width:  0.9375em;
+  height:  0.9375em;
+  border: $search-filter-unchecked-border-color 1px solid;
+  margin-left: 0.65em;
+  flex-shrink: 0;
+}
+input[type="checkbox"]:checked + label .checkbox-box{
+  background-color: $search-filter-checked-background-color;
+}
+input[type="checkbox"]:checked + label .checkbox-box:after{
+	content: '';
+	position: absolute;
+	width: 0.5em;
+	height: 0.2em;
+	background: transparent;
+	top: 0.175em;
+	right: 0.125em;
+	border: 0.1875em solid white;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+// .checkbox-label{
+//   background-color: lightblue;
+// }

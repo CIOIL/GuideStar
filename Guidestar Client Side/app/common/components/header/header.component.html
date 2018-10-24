@@ -1,0 +1,117 @@
+<div class="app-header-menu-container">
+  <div class="app-header-menu" role="navigation">
+    <div class="app-header-menu-child">
+      <ul class="menuBar">
+        <li *ngFor="let item of menuItems" routerLinkActive="currentPage" [routerLink]="item.link" (keyup.enter)="navigate(item.link)"><a [routerLink]="item.link">{{item.text}}</a></li>
+      </ul>
+    </div>
+    <div id="app-header-menu-pull-end" >
+      <ul class="menuBar">
+        <li *ngFor="let item of sideItems" 
+            [routerLink]="item.link" 
+            [routerLinkActive]="!item.caret ? 'currentPage' : ''"
+            tabindex="0" 
+            role="button" 
+            [attr.data-toggle]="item.text === $Label.Accessibility ? 'popover' : ''" 
+            [attr.aria-haspopup]="item.caret || false"
+            data-placement="bottom">
+          <!--<a [routerLink]="item.link" tabindex="0" role="button" [popover]="accessibilityMenuContent" placement="bottom"  (onShown)="accessibilityMenuShown()">-->
+          <a>
+            <i *ngIf="item.caret" class="fa fa-caret-down" aria-hidden="true"></i>
+            <span class="medium-hidden left-menu-text">{{item.text}}</span>
+            <i [class]="item.icon" aria-hidden="true" [attr.aria-label]="item.text"></i>
+          </a>
+        </li>
+      </ul>
+      <div id="accessibilityAnchor"></div>
+      <!--<ng-template #accessibilityMenuContent>-->
+        <div id="accessibilityMenuContent" class="hide-me" role="application">
+          <div class="accessibility-menu-header" tabindex="0" functionName="closePopover">
+            {{$Label.Accessibility_menu}}
+            <img class="accessibility-close-icon" [src]="getBackgroundImageUrl(closeIcon)" functionName="closePopover" [attr.aria-label]="$Label.Close"/>
+          </div>
+          <div id="firstAccessibilityMenuItem" class="accessibility-menu-item" tabindex="0" functionName="contrastClicked">
+            <i class="fa fa-adjust" aria-hidden="true" functionName="contrastClicked"></i>
+            {{$Label.High_contrast}}
+          </div>
+          <div class="accessibility-menu-item" tabindex="0" functionName="fontClicked">
+            <i class="fa fa-font" aria-hidden="true" functionName="fontClicked"></i>
+            {{$Label.Large_font}}
+          </div>
+          <div class="accessibility-menu-item" tabindex="0" functionName="colorsClicked">
+            <i class="fa fa-pie-chart" aria-hidden="true" functionName="colorsClicked"></i>
+            {{$Label.High_contrast_colors}}
+          </div>
+          <div class="accessibility-menu-item" tabindex="0" functionName="resetAccessibilityClicked">
+            <i class="fa fa-ban" aria-hidden="true" functionName="resetAccessibilityClicked"></i>
+            {{$Label.Reset_Accessibility_Settings}}
+          </div>
+          <div class="accessibility-menu-item" tabindex="0" functionName="accessibilityStatementClicked">
+            <i class="fa fa-pencil-square-o" aria-hidden="true" functionName="accessibilityStatementClicked"></i>
+            {{$Label.Accessibility_statement}}
+          </div>
+        </div>
+      <!--</ng-template>-->
+    </div>
+  </div>
+</div>
+<div class="app-header-bar-container" role="banner" #headerContainer>
+  <div class="app-header-bar">
+    <a id="app-header-logo" [routerLink]="['/', 'home']">
+      <img [src]="getBackgroundImageUrl('assets/img/logo-guidestar-amutot-text.png')" class="site-logo medium-hidden" [alt]="$Label.Site_Title"/>
+      <img [src]="getBackgroundImageUrl('assets/img/logo-guidestar.png')" class="site-logo medium-shown" [alt]="$Label.Site_Title"/>
+    </a>
+    <img [src]="getBackgroundImageUrl('assets/img/logo-justice-menora-text.png')" class="moj-menora medium-hidden" [alt]="$Label.MOJ"/>
+    <img [src]="getBackgroundImageUrl('assets/img/logo-justice-menora.png')" class="moj-menora medium-shown" [alt]="$Label.MOJ"/>
+    <!--<div class="app-header-sub-title">
+      {{$Label.MOJ}}
+    </div>-->
+    <div id="search-icon-container-green" (click)="searchIconClicked($event)" class="search-icon-container-green sps" *ngIf="location.path() != '/home' ">
+      <i class="fa fa-search "></i>
+    </div>
+    <div 
+      [ngClass]="{'hamburger': true, 'hamburger--collapse': true, 'app-header-bar-hamburger': true, 'is-active': hamburgerActive}" 
+      (click)="hamburgerClicked()"
+      aria-label="Menu" aria-controls="navigation" aria-expanded="true/false">
+      <span class="hamburger-box">
+        <span class="hamburger-inner" id="hamburger-line">
+        </span>
+      </span>
+    </div>
+    <div id="hamburger-menu" [ngClass]="{'menu-open' : hamburgerActive, 'menu-closed' : !hamburgerActive}">
+      <ul>
+        <li *ngFor="let item of menuItems" class="hamburger-menu-item" [routerLink]="item.link" (click)="hamburgerClicked()"><span>{{item.text}}</span></li>
+      </ul>
+    </div>
+    <div class="app-header-bar-search sps" id="header-search-bar" [ngClass]="location.path() === '/home' ? 'home-hide-search' : 'home-show-search'" >
+    <form novalidate [formGroup]="searchForm" class="header-search-form" role="application">
+      <app-auto-complete 
+              [remoteAction]="remoteActionAutoComplete" 
+              [allowExtValue]="true"
+              [parentFormGroup]="searchForm"
+              [controlName]="searchWordControlName"
+              [showSelection]="false"
+              [illegalSearchRegex]="illegalSearchRegex"
+              [discardResults]="closeAutoComplete"
+              (onSelect)="searchItemSelected($event)"
+              >
+        <input 
+              type="search" 
+              autocomplete="off"
+              id="search-input" 
+              [placeholder]="getSearchPlaceholder()"
+              [attr.aria-label]="getSearchAriaLabel()"
+              [formControlName]="searchWordControlName"
+              (keydown.enter)="goToSearch()"
+              />
+      </app-auto-complete>
+        <div class="search-icon-container" (click)="goToSearch()" (keydown.enter)="goToSearch()" [attr.aria-label]="$Label.Search_aria" role="button" tabindex="0">
+          <i class="fa fa-search search-icon"></i>
+        </div>   
+    </form>
+    </div>
+    <div class="app-header-bar-search sps" [ngClass]="location.path() === '/home' ? 'home-show-search' : 'home-hide-search'">
+      &nbsp;
+    </div>
+  </div>
+</div>

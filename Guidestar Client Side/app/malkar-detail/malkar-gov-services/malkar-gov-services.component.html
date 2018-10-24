@@ -1,0 +1,57 @@
+<div class="malkar-services-container">
+  <h2>{{$Label.Government_services}}</h2>
+  <div class="malkar-services-content malkar-mobile-small">
+    {{$Label.Government_services_text}}
+  </div>
+  <div *ngIf="malkarGovServices && activeKeys.length > 0" class="malkar-services-tables">
+    <div class="malkar-services-table-heading" (click)="toggleTableView(true)">
+      <h3 class="malkar-service-tive-heading">
+        {{malkarGovServices.active.Label}}
+      </h3>
+      <div>
+        {{malkarGovServices.active.Sum | number : '1.0-0'}} ₪
+        <app-chevron [clicked]="activeIsCollapsed" class="malkar-services-chevron" [styles]="{'color': 'white', 'padding' : '0 0.5em 0 0.5em'}"></app-chevron>
+      </div>
+    </div>
+    <div [@expandCollapse]="activestate" style="overflow: hidden">
+      <div *ngFor="let quarter of activeKeys; let index1 = index;">
+        <h4 class="malkar-services-table-list-heading">
+          {{quarter}}
+        </h4>
+        <app-data-table-list 
+                      [tableList]="malkarGovServices.active.DataMap[activeKeys[index1]].DataMap" 
+                      [titleSeparator]="' '" 
+                      [normalSum]="true" 
+                      [headerStyle]="{'color': 'black', 'border-bottom': '1px solid #cededf'}"
+                      [headerLevel]="'h5'"
+                      [nullTitle]="$Label['GSTAR_Other']">
+        </app-data-table-list>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="malkarGovServices && inactiveKeys.length > 0" class="malkar-services-tables">
+    <div class="malkar-services-table-heading" (click)="toggleTableView(false)">
+      <h3 class="malkar-service-tive-heading">
+        {{malkarGovServices.inactive.Label}}
+      </h3>
+      <div>
+        {{malkarGovServices.inactive.Sum | number : '1.0-0'}} ₪
+        <app-chevron [clicked]="inactiveIsCollapsed" class="malkar-services-chevron" [styles]="{'color': 'white', 'padding' : '0 0.5em 0 0.5em'}"></app-chevron>
+      </div>
+    </div>
+    <div [@expandCollapse]="inactivestate" style="overflow: hidden">
+      <div *ngFor="let quarter of inactiveKeys; let index1 = index;">
+        <h4 class="malkar-services-table-list-heading">
+          {{quarter}}
+        </h4>
+          <app-data-table-list 
+                      [tableList]="malkarGovServices.inactive.DataMap[inactiveKeys[index1]].DataMap" 
+                      [titleSeparator]="' '" 
+                      [normalSum]="true" 
+                      [headerStyle]="{'color': 'black', 'border-bottom': '1px solid #cededf'}"
+                      [headerLevel]="'h5'">
+          </app-data-table-list>
+      </div>
+    </div>
+  </div>
+</div>

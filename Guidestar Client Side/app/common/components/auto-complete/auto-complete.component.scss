@@ -1,0 +1,56 @@
+@import "../../../../assets/scss/params.scss";
+
+.auto-complete-input-wrapper{
+  width: fit-content;
+  // width: 100%;
+}
+.auto-complete-container{
+    position: relative;
+}
+
+.auto-complete-section{
+    color: $auto-complete-title-color;
+    display: block;
+    border-bottom: 1px solid $auto-complete-separator-color; 
+    margin-top: 0.5em;
+    font-weight: bold;
+}
+// .auto-complete-section:before{
+//     content: '';
+//     padding-right: 0.5em;
+// }
+.auto-complete-key{
+    padding-right: 0.625em;
+}
+.auto-complete-item{
+    border: 0px;
+    list-style-type: none; 
+    padding: 0.25em 0.625em 0.4375em 0;
+    display: block;
+    font-weight: normal;
+    color: $font-color;
+}
+.auto-complete-result{
+    position: absolute;
+    border: 1px solid $auto-complete-border-color;
+    list-style-type: none;
+    box-shadow: 0 2px 2px $box-shadow-color;
+    box-sizing: border-box;
+    background-color: $background-color;
+    overflow-x: auto;
+    width: 100%;
+}
+.auto-complete-item-wrapper{
+  cursor: pointer;
+}
+
+.auto-complete-item-wrapper:hover,  .auto-complete-item-wrapper:focus{
+    background-color: $auto-complete-background-hover-color;
+    outline: none;
+ }
+
+ .auto-complete-aria{
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+ }

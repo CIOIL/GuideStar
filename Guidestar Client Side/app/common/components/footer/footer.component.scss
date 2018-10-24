@@ -1,0 +1,62 @@
+@import "../../../../assets/scss/params.scss";
+
+li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-container{
+  background-color: $footer-bg-color;
+  border-top: 1px solid $footer-border-color;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-content-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: $page-content-width;
+  margin: 0 2em 0 1em;
+}
+.footer-links{
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+}
+.footer-link{
+  color: $link-color;
+  padding: 0 0.75em 0 0.75em;
+  border-right: 1px solid $footer-items-divider-color;
+}
+.footer-link:first-child{
+  border-right: none;
+  padding-right: 0;
+}
+.footer-link a{
+  font-weight: normal;
+}
+.footer-copyright{
+  color: $footer-copyright-color;
+}
+
+@media only screen and (max-width: 40.0625em){
+  .footer-content-container{
+    font-size: 0.8em;
+    flex-flow: column wrap;
+    align-items: center;
+    margin: 0;
+  }
+  .footer-links{
+    justify-content: center;
+  }
+  .footer-link:last-child{
+    padding-left: 0;
+  }
+  // .footer-links{
+  //   display: none;
+  // }
+}

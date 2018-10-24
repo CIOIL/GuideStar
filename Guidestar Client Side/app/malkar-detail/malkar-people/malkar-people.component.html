@@ -1,0 +1,92 @@
+<div class="malkar-people-container">
+  <h2>{{$Label.Malkar_people}}</h2>
+  <div class="malkar-people-content" *ngIf="malkar">
+    <div class="malkar-people-info malkar-mobile-small">
+      {{$Label.Malkar_people_text}}
+      <span *ngIf="malkar.lastAddDataYear">({{$Label.Updated_To}} {{malkar.lastAddDataYear}})</span>
+    </div>
+    <div class="malkar-people-section" *ngIf="malkar.lastAddDataYear">
+      <h3 *ngIf="needRecaptchPeople"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Wage_earners}}</h3>
+      <div *ngIf="needRecaptchPeople">
+        <div class="malkar-people-info malkar-mobile-small">
+          {{$Label.Wage_earners_text}}
+        </div>
+      </div>
+      <div class="malkar-people-section" *ngIf="needRecaptchPeople">
+       <re-captcha [site_key]="googleRecaptchaPublicKey" (captchaResponse)="handleCorrectCaptcha($event)" (captchaExpired)="captchaExpired()"></re-captcha>
+      </div>
+      <div  *ngIf="!needRecaptchPeople && peopleGroupsContainsData">
+        <div class="malkar-people-section" *ngFor="let group of peopleGroups" [ngStyle]="{'display': showPeopleGroup(group) ? 'block' : 'none'}">
+          <h3 *ngIf="showPeopleGroup(group)"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{group}}</h3>
+          <div [@expandCollapse]="peoplestate[group]" *ngIf="showPeopleGroup(group)" class="malkar-people-list-container">
+            <div class="malkar-people-list malkar-mobile-small" *ngFor="let person of peopleGroupMap[group]">
+              <b>{{person.MainLabel}}</b>, {{person.SubLabel}}
+            </div>
+          </div>
+          <div class="malkar-people-section-expander desktop-show" *ngIf="showExpandButton(group, false)" (click)="toggleExpandView(group)" aria-hidden="true">
+            <div class="malkar-people-section-expander-button malkar-people-expand-button" *ngIf="peoplestate[group] === 'collapsed'" tabindex="0" (keydown.Enter)="toggleExpandView(group)">
+              {{$Label.More}}
+            </div>
+            <div class="malkar-people-section-expander-button malkar-people-collapse-button" *ngIf="peoplestate[group] === 'expanded'" tabindex="0" (keydown.Enter)="toggleExpandView(group)">
+              {{$Label.Less}}
+            </div>
+          </div>
+          <div class="malkar-people-section-expander mobile-show" *ngIf="showExpandButton(group, true)" (click)="toggleExpandView(group)" aria-hidden="true">
+            <div class="malkar-people-section-expander-button malkar-people-expand-button" *ngIf="peoplestate[group] === 'collapsed'" tabindex="0" (keydown.Enter)="toggleExpandView(group)">
+              {{$Label.More}}
+            </div>
+            <div class="malkar-people-section-expander-button malkar-people-collapse-button" *ngIf="peoplestate[group] === 'expanded'" tabindex="0" (keydown.Enter)="toggleExpandView(group)">
+              {{$Label.Less}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!needRecaptchPeople && !peopleGroupsContainsData" class="malkar-mobile-small">
+        {{$Label.Not_Found_plural}} {{$Label.Wage_earners}}
+      </div>
+      
+    </div>
+    <div class="malkar-people-section" *ngIf="malkarConnected && malkarConnected.malkarsByContact && (malkarConnected.malkarsByContact | json) != ({} | json)">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Related_orgs}}</h3>
+      <div class="malkar-people-info malkar-mobile-small">
+        {{$Label.Related_orgs_text}} <a [routerLink]="['/', pages.malkar, malkar.regNum, malkarPages.documents]" style="font-weight: bold">{{$Label.In_malkar_docs}}</a>
+      </div>
+      <div [@expandCollapse]="orgsState" class="malkar-people-list-container">
+        <div class="malkar-people-orgs-list" *ngFor="let org of malkarConnected.malkarsByContact.Data">
+          <a class="malkar-people-orgs-list-item" [routerLink]="org.InternalLink">{{org.MainLabel}}</a>
+        </div>
+      </div>
+      <div class="malkar-people-section-expander desktop-show" *ngIf="showOrgCollapse" (click)="toggleExpandView(false)" aria-hidden="true">
+        <div class="malkar-people-section-expander-button malkar-people-expand-button" *ngIf="orgsState === 'collapsed'" tabindex="0" (keydown.Enter)="toggleExpandView(false)">
+          {{$Label.More}}
+        </div>
+        <div class="malkar-people-section-expander-button malkar-people-collapse-button" *ngIf="orgsState === 'expanded'" tabindex="0" (keydown.Enter)="toggleExpandView(false)">
+          {{$Label.Less}}
+        </div>
+      </div>
+      <div class="malkar-people-section-expander mobile-show" *ngIf="mobileShowOrgCollapse" (click)="toggleExpandView(false)" aria-hidden="true">
+        <div class="malkar-people-section-expander-button malkar-people-expand-button" *ngIf="orgsState === 'collapsed'" tabindex="0" (keydown.Enter)="toggleExpandView(false)">
+          {{$Label.More}}
+        </div>
+        <div class="malkar-people-section-expander-button malkar-people-collapse-button" *ngIf="orgsState === 'expanded'" tabindex="0" (keydown.Enter)="toggleExpandView(false)">
+          {{$Label.Less}}
+        </div>
+      </div>
+    </div>
+    <div class="malkar-people-section" *ngIf="malkarWageEarners && (malkarWageEarners | json) != ([] | json)">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Five_highest}}</h3>
+      <app-data-table-list [tableList]="malkarWageEarners" [titleSeparator]="' '" [hideSum]="true" [expandRow]="wageEarnersExpandLabel"></app-data-table-list>
+    </div>
+    <div class="malkar-people-section" *ngIf="foundersList && foundersList.length > 0">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Org_founders}}</h3>
+      <div class="malkar-people-list-container">
+        <div class="malkar-people-list malkar-mobile-small" *ngFor="let founder of foundersList">
+          {{founder}}
+        </div>
+      </div>
+      <div class="malkar-people-info malkar-mobile-small">
+        <span [innerHtml]="$Label.Org_founders_text"></span><a [routerLink]="['/', pages.malkar, malkar.regNum, malkarPages.documents]" style="font-weight: bold"> {{$Label.In_malkar_docs}}</a>
+      </div>
+    </div>
+  </div>
+</div>

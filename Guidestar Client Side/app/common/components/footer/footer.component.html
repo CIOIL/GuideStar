@@ -1,0 +1,18 @@
+<div class="footer-container" role="contentinfo">
+  <div class="footer-content-container" role="contentinfo">
+    <ul class="footer-links">
+      <li class="footer-link">
+        <a [routerLink]="['/', 'contact']">{{$Label.Contact_us}}</a>
+      </li>
+      <li class="footer-link">
+        <a [routerLink]=" ['page', 'privacy']">{{$Label.Privacy_rules}}</a>
+      </li>
+      <li class="footer-link">
+        <a [routerLink]=" ['page', 'terms']">{{$Label.Usage_terms}}</a>
+      </li>
+    </ul>
+    <div class="footer-copyright">
+      {{$Label.Rights_reserved}}
+    </div>
+  </div>
+</div>

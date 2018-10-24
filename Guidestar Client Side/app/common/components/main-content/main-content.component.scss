@@ -1,0 +1,19 @@
+@import "../../../../assets/scss/params.scss";
+
+.main-content-h2{
+  margin: 0 0.5em 0.5em 0;
+}
+.main-content{
+  margin: 0 0.5em 0 2.5em;
+  // line-height: 1.62;
+  // font-size: 18px;
+}
+
+@media only screen and (max-width: 40.063em){
+  .main-content-h2{
+    margin: 0 0.625em 0.625em 0;
+  }
+  .main-content{
+    margin: 0 0.625em 1em 0.5em;
+  }
+}

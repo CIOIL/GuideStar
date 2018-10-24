@@ -1,0 +1,172 @@
+<div class="malkar-info-container">
+  <div class="malkar-info-data-container">
+    <div class="malkar-info-data-main-container">
+      <h2>{{$Label.Malkar_Info}}</h2>      
+      <div class="malkar-info-main-data">
+        <h3 *ngIf="malkarData && malkarData.orgGoal"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Malkar_purpose}}</h3>
+        <div class="malkar-info-content malkar-mobile-small" *ngIf="malkarData && malkarData.orgGoal">
+          <long-text [minHeight]="'2.9em'" [showSmallButton]="true" [scrollOffset]="205">{{malkarData.orgGoal}}</long-text>
+        </div>
+        <div class="malkar-info-two-column flex-row-class">
+          <div class="malkar-info-one-column">
+            <div class="malkar-info-section flex-wrap-class" *ngIf="malkarData && malkarData.tchumPeilutSecondary && malkarData.tchumPeilutSecondary.length > 0">
+              <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Malkar_tchum}}</h3>
+              <div class="malkar-info-content malkar-mobile-small">
+                {{malkarData.tchumPeilutSecondary | stringifyList}}
+              </div>
+            </div>
+            <div class="malkar-info-section" *ngIf="malkarData && (malkarData.sugHitagdutLabel || malkarData.isStatusActiveText || malkarData.regNum || malkarData.orgYearFounded || malkarData.employees || malkarData.volunteers)">
+              <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Malkar_Info_2}}</h3>
+              <div class="malkar-info-content malkar-mobile-small">
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.sugHitagdutLabel" [label]="$Label.MalkarType" [value]="malkarData.sugHitagdutLabel"></app-label-value>
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.isStatusActiveText" [label]="$Label.Status" [value]="malkarData.isStatusActiveText"></app-label-value>
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.regNum" [label]="$Label.Registration_num" [value]="malkarData.regNum"></app-label-value>
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.orgYearFounded" [label]="$Label.FoundedYear" [value]="malkarData.orgYearFounded"></app-label-value>
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.employees" [label]="$Label.Employees" [value]="malkarData.employees" [isNumber]="true" [addendum]="malkarData.lastAddDataYear"></app-label-value>
+                <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkarData.volunteers" [label]="$Label.Num_Volunteers" [value]="malkarData.volunteers" [isNumber]="true" [addendum]="malkarData.lastAddDataYear"></app-label-value>
+              </div>
+            </div>
+          </div>
+          <div class="malkar-info-one-column">
+            <div class="malkar-info-section" *ngIf="malkarData && (malkarData.showProperManagement || malkarData.showApproval46 || malkarData.showReports || malkarData.isApprovedAsExperiencePlace)">
+              <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Documents_and_certs}}</h3>
+              <div class="malkar-info-content malkar-mobile-small">
+                <div class="flex-row-class malkar-info-boolean" *ngIf="malkarData.showProperManagement" >
+                  <app-boolean-indicator [customStyle]="getLabelValueStyle()" [isChecked]="malkarData.hasProperManagement" [label]="$Label.Nihul_Takin"></app-boolean-indicator>
+                  <app-info-icon [label]="$Label.Tooltip_Nihul_Takin" [position]="'right'"></app-info-icon>
+                </div>
+                <div class="flex-row-class malkar-info-boolean" *ngIf="malkarData.showApproval46">
+                  <app-boolean-indicator [customStyle]="getLabelValueStyle()" [isChecked]="malkarData.approval46" [label]="$Label.Tax_reduction"></app-boolean-indicator>
+                  <app-info-icon [label]="$Label.Tooltip_46" [position]="'right'"></app-info-icon>
+                </div>
+                <div class="flex-row-class malkar-info-boolean" *ngIf="malkarData.showReports">
+                  <app-boolean-indicator [customStyle]="getLabelValueStyle()" [isChecked]="malkarData.hasReports" [label]="$Label.AnnualReports"></app-boolean-indicator>
+                  <app-info-icon [label]="$Label.Tooltip_Annual_Reports" [position]="'right'"></app-info-icon>
+                </div>
+                <div class="flex-row-class malkar-info-boolean" *ngIf="malkarData.isApprovedAsExperiencePlace">
+                  <app-boolean-indicator [customStyle]="getLabelValueStyle()" [isChecked]="malkarData.isApprovedAsExperiencePlace" [label]="$Label.SocialInvolvement"></app-boolean-indicator>
+                  <app-info-icon [label]="$Label.Tooltip_SocialInvolvement" [position]="'right'"></app-info-icon>
+                </div>
+              </div>
+            </div>
+            <div class="malkar-info-section" *ngIf="malkarData.turnover || malkarData.govSupportSum || malkarData.govConnectionSum || malkarData.nationalInsuranceSum">
+              <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Financial_data}}</h3>
+              <div class="malkar-info-content malkar-mobile-small">
+                  <app-label-value *ngIf="malkarData.turnover" 
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Turnover" 
+                                    [value]="malkarData.turnover" 
+                                    [isCurrency]="true"  
+                                    [addendum]="malkarData.lastAddDataYear">
+                  </app-label-value>
+                  <app-label-value *ngIf="malkarData.govSupportSum"
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Government_Support" 
+                                    [value]="malkarData.govSupportSum" 
+                                    [isCurrency]="true" 
+                                    [addendum]="malkarData.govSupportLastYear"
+                                    [tooltip]="$Label.Tooltip_MalkarInfoGovSupport"
+                                    [tooltipPosition]="'right'">
+                  </app-label-value>
+                  <app-label-value  *ngIf="malkarData.govConnectionSum"
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Services_for_gov" 
+                                    [value]="malkarData.govConnectionSum" 
+                                    [isCurrency]="true" 
+                                    [addendum]="malkarData.govConnectionLastYear"
+                                    [tooltip]="$Label.Tooltip_MalkarInfoGovConnection"
+                                    [tooltipPosition]="'right'">
+                  </app-label-value>
+                  <app-label-value *ngIf="malkarData.nationalInsuranceSum"
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.National_Insurance_Funds" 
+                                    [value]="malkarData.nationalInsuranceSum" 
+                                    [isCurrency]="true" 
+                                    [addendum]="malkarData.nationalInsuranceLastYear"
+                                    [tooltip]="$Label.Tooltip_MalkarInfo_NationalInsurance"
+                                    [tooltipPosition]="'right'">
+                  </app-label-value>
+              </div>
+            </div>
+            <div class="malkar-info-section" *ngIf="malkarData.hekdeshBelongingsCount || malkarData.hekdeshRealEstateCount || malkarData.hekdeshMoneySum">
+              <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Assets}}</h3>
+              <div class="malkar-info-content malkar-mobile-small">
+                <app-label-value *ngIf="malkarData.hekdeshMoneySum" 
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Liquid_Assets_net" 
+                                    [value]="malkarData.hekdeshMoneySum"
+                                    [addendum]="malkarData.hekdeshMoneyYear"
+                                    [isCurrency]="true">
+                  </app-label-value>
+                  <app-label-value *ngIf="malkarData.hekdeshRealEstateCount" 
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Real_Estate" 
+                                    [value]="malkarData.hekdeshRealEstateCount + ' ' + $Label.Assets" 
+                                    [isCurrency]="false">
+                  </app-label-value>
+                  <app-label-value *ngIf="malkarData.hekdeshBelongingsCount" 
+                                    [customStyle]="getLabelValueStyle()" 
+                                    [label]="$Label.Belongings" 
+                                    [value]="malkarData.hekdeshBelongingsCount + ' ' + $Label.Assets" 
+                                    [isCurrency]="false">
+                  </app-label-value>
+              </div>
+            </div>
+          </div>
+        </div>        
+        <div class="malkar-info-section" *ngIf="malkarData && (getMalkarAddress(malkarData) || getMalkarActivityArea(malkarData, $Label['Search_National']) || getMalkarActivityPlaces(malkarData))">
+          <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Official_address}}</h3>
+          <div class="flex-column-class malkar-info-content malkar-mobile-small">
+            <!--<app-label-value *ngIf="malkarData.malkarLocation" [label]="$Label.Activity_place" [value]="malkarData.malkarLocation"></app-label-value>-->
+            <!--<div class="malkar-info-separator" *ngIf="malkarData.malkarLocation && getAddress()"></div>-->
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarAddress(malkarData)" [label]="$Label.Address" [value]="getMalkarAddress(malkarData)"></app-label-value>
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarActivityArea(malkarData, $Label['Search_National'])" [label]="$Label.Activities_area" [value]="getMalkarActivityArea(malkarData, $Label['Search_National']) | stringifyList"></app-label-value>
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarActivityPlaces(malkarData)" [label]="$Label.Activity_Places" [value]="getMalkarActivityPlaces(malkarData) | stringifyList"></app-label-value>
+          </div>
+        </div>
+        <div *ngIf="!isHekdesh" class="malkar-info-section malkar-info-content malkar-mobile-small">
+          <span [innerHtml]="$Label.Malkar_info_disclaimer"></span>
+          <a [routerLink]="['/', 'page', 'userguide']"><span [innerHtml]="$Label.Malkar_info_disclaimer_2"></span></a>
+        </div>
+        <div *ngIf="isHekdesh" class="malkar-info-section malkar-info-content malkar-mobile-small">
+          <span [innerHtml]="$Label.Malk_info_disclaimer_hekdesh"></span>
+          <a [routerLink]="['/', 'page', 'userguide']"><span [innerHtml]="$Label.Malk_info_disclaimer_hekdesh_2"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="malkar-info-data-side-container">
+      <h3 *ngIf="malkarData.tchumPeilutMainNum && chartDataDistrict"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Distribution_of_activities}} <span class="malkar-info-chart-subheader">{{malkarData.tchumPeilutMain | stringifyList}}</span></h3>
+      <img class="malkar-info-graph-switcher" #chartActiveIcon *ngIf="!graphShowList" (click)="showChartClicked($event, false)" (keydown.enter)="toggleShowChart(false)" [src]="getBackgroundImageUrl(iconShowChart)" [alt]="$Label.Toggle_Graph_Chart" role="application" tabindex="0"/>
+      <img class="malkar-info-graph-switcher" #listActiveIcon *ngIf="graphShowList" (click)="showChartClicked($event, true)" (keydown.enter)="toggleShowChart(true)" [src]="getBackgroundImageUrl(iconShowList)" [alt]="$Label.Toggle_Graph_Chart" role="application" tabindex="0"/>
+      <div class="screenreader-only" aria-atomic="true" role="option" aria-live="polite">
+        <div class="screenreader-only" *ngIf="!graphShowList">{{$Label.Display_Chart}}</div>
+        <div class="screenreader-only" *ngIf="graphShowList">{{$Label.Display_List}}</div>
+      </div>
+      <div class="malkar-info-chart-pie" *ngIf="malkarData.tchumPeilutMainNum && chartDataDistrict">
+        <app-chart-pie [items]="chartDataDistrict" [seeAllLegend]="false"  [showTotal]="false" [showTotalInLegend]="false" [minHeightLegend]="'7em'" [chartHeight]="70" [showSmallButton]="true" [bucketSum]="1" [bucketHidden]="true">         
+        </app-chart-pie>
+      </div>
+      <div class="malkar-info-agm-map" *ngIf="false && malkarData && mapCenterLat && mapCenterLng" aria-hidden="true">
+        <div class="malkar-info-map-header">
+          <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Activity_Places}}</h3>
+          <app-info-icon [label]="$Label.Tooltip_Activities_area" [position]="'right'"></app-info-icon>
+        </div>
+        <agm-map  [fitBounds]="latlngBounds" [latitude]="mapCenterLat" [longitude]="mapCenterLng" [fullscreenControl]="true" [zoom]="14" [mapTypeControl]="true">
+          <agm-marker-cluster [imagePath]="getBackgroundImageUrl('assets/img/cluster/m')">
+            <agm-marker [latitude]="malkarData.lat" [longitude]="malkarData.lng">
+              <agm-info-window *ngIf="malkarData.geolocationDescription">
+                <strong>{{malkarData.geolocationDescription}}</strong>
+              </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngFor="let malkarCity of malkarData.malkarCities" [latitude]="malkarCity.lat" [longitude]="malkarCity.lng">
+              <agm-info-window *ngIf="malkarCity.description">
+                <strong>{{malkarCity.description}}</strong>
+              </agm-info-window>
+            </agm-marker>
+          </agm-marker-cluster>
+        </agm-map>
+        <!--<app-malkar-map></app-malkar-map>-->
+      </div>
+    </div>
+  </div>
+</div>

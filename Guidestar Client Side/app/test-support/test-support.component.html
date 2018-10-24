@@ -1,0 +1,117 @@
+<div class="search-results-page">
+  <h1>{{$Label.Support_tests}}</h1>
+  <div class="search-headline-container">
+    <div  *ngIf="testSupportList"
+          class="search-summary" 
+          [appMarker]="testSupportList.length" 
+          [innerHTML]="getSearchSummaryText()"
+          role="heading" aria-level="2" aria-atomic="true" aria-live="polite"
+          [appMarkerPrefixHtml]="'<b>'" 
+          [appMarkerSuffixHtml]="'</b>'">
+    </div>
+    <div *ngIf="!testSupportList"
+          class="search-summary" >
+    </div>
+    <app-loader [showLoader]="testSupportService.loading[testSupportPageFunctions.getAllTestSupports] || isLoading"></app-loader>
+    <div class="search-sort-container" #sortConfigElement>
+      <div class="search-sort-collapsed" tabindex="0" (click)="toggleSort()" (keydown.Enter)="toggleSort()" aria-haspopup="true" [attr.aria-expanded]="showSort || false">
+        <div class="display-always">
+          {{$Label.Sort}}
+        </div>
+        <span class="mobile-hide">
+          {{$Label.Results}}
+        </span>
+        <img class="sort-icon headline-sort-icon" [src]="getBackgroundImageUrl(iconSortDirection)" [attr.alt]="iconSortLabel"/>
+      </div>
+      <div class="search-sort-expanded" [ngStyle]="{'display': showSort ? 'block' : 'none'}" *ngIf="sortConfig" (keydown.Escape)="toggleSort()">
+        <div class="search-sort-option" *ngFor="let item of sortConfig" [ngStyle]="{'font-weight': item.apiName === sortItem?.apiName ? 'bold' : 'normal'}" (click)="setSortItem(item)" (keydown.Enter)="setSortItem(item)" tabindex="0">
+          {{item.label}}
+        </div>
+        <div class="search-sort-direction-container">
+          <div class="search-sort-direction" (click)="toggleSortDirection('up')" (keydown.Enter)="toggleSortDirection('up')" [ngStyle]="{'font-weight': !sortItem?.sortDesc ? 'bold' : 'normal'}" tabindex="0">
+            <img class="sort-icon" [src]="getBackgroundImageUrl(iconSortUp)"/>
+            {{$Label.Sort_up}}
+          </div>
+          <div class="search-sort-direction" (click)="toggleSortDirection('down')" (keydown.Enter)="toggleSortDirection('down')" [ngStyle]="{'font-weight': !sortItem?.sortDesc ? 'normal' : 'bold'}" tabindex="0">
+           <img class="sort-icon" [src]="getBackgroundImageUrl(iconSortDown)"/>
+            {{$Label.Sort_down}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search-results-container">
+      <div class="search-filter" *ngIf="filterConfig" [ngClass]="{'search-filter-expanded': displayFilter, 'search-filter-collapsed': !displayFilter}">      
+        <!--
+          (initSearchFiltersObservable)="initSearchFiltersObservable($event)"
+          [initSearchFilter]="selectedSearchFilters"
+        -->
+        <app-search-filter  [filterConfig]="filterConfig" 
+                            [storeKey]="testSupportStoreKey"
+
+                            (displayed)="toggleFilter($event)">
+        </app-search-filter>
+      </div>
+    <div class="search-results">
+      <div class="search-result-list" *ngIf="testSupportListCurrent">
+        <div class="search-result-item" *ngFor="let item of testSupportListCurrent; let last = last;">
+          <a [routerLink]="['/', 'test-support', item.Id ]" (keydown.Enter)="itemSelected($event)">
+            <h2 class="result-item-title"
+                [appMarker]="searchWord" 
+                [innerHTML]="item.SupportName"
+                [appMarkerPrefixHtml]="getNamePrefixHtml()" 
+                [appMarkerSuffixHtml]="'</b>'"></h2>
+          </a>
+          <div class="ts-content-section" *ngIf="item.Description">
+            <long-text [minHeight]="'3em'" [showSmallButton]="true" [scrollOffset]="185">{{item.Description}}</long-text>
+          </div>
+          <div class="ts-content-section">
+            <app-label-value *ngIf="item.OrganType"
+              [label]="$Label.Gov_Office" 
+              [value]="item.OrganType">
+            </app-label-value>
+          </div>
+          <div class="ts-content-section">
+            <app-label-value *ngIf="item.DateCreated"
+              [label]="$Label.Date_published" 
+              [value]="item.DateCreated"
+              [isDate]="true">
+            </app-label-value>
+          </div>
+          <div class="ts-content-section">
+            <app-label-value *ngIf="item.DateUpdated"
+              [label]="$Label.Date_updated" 
+              [value]="item.DateUpdated"
+              [isDate]="true">
+            </app-label-value>
+          </div>
+          <div class="search-result-buttons-container">
+            <div class="ts-link">
+              <a [href]="item.FileLink" target="_blank" [attr.aria-label]="$Label.Test_file + ' ' + item.SupportName">
+                <!--<img class="linker-icon" [src]="getBackgroundImageUrl(pdfIcon)" alt="pdf icon" aria-hidden="true"/>-->
+                <img class="linker-icon" [src]="getBackgroundImageUrl(docIcon)" alt="doc icon" aria-hidden="true"/>
+                {{$Label.Test_file}}
+              </a>
+            </div>
+            <a class="search-result-item-button" [routerLink]="['/', 'test-support', item.Id ]" (keydown.Enter)="itemSelected($event)" role="button" [attr.aria-label]="$Label.Expand_about + ' ' + item.SupportName">
+              <div class="search-result-item-button-label">
+                {{$Label.Expand}}
+              </div>
+            </a>
+          </div>
+          <div *ngIf="last" (appear)="lastInView()" >
+          </div>
+        </div>
+
+        <div class="search-results-more-container" *ngIf="testSupportListCurrent && testSupportList && testSupportListCurrent.length < testSupportList.length">
+          <div class="search-results-more" (click)="loadMore()" (keydown.Enter)="loadMore()" tabindex="0">
+            <div class="search-results-more-label">
+              {{$Label.AdditionalResults}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

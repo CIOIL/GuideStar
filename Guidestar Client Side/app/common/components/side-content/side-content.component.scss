@@ -1,0 +1,47 @@
+@import "../../../../assets/scss/params.scss";
+
+.side-heading{
+  background-color: $contact-left-title-background-color;
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $background-color;
+  padding: 0.5em 1em 0.5em 0;
+  margin: 0 0 1em 0;
+}
+.side-content{
+  // padding: 0 1em 0 0.5em;
+  margin: 0 0 2em 0;
+}
+ul{
+  list-style: none !important;
+}
+.expand-button-container{
+  border-bottom: 1px solid $table-row-border-color;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  margin: 1em 0 0 0;
+}
+.expand-button{
+  padding: 0.2em 0 0.3em 0;
+  width: 6.25em;
+  text-align: center;
+  background-color: $search-result-item-button-color;
+  color: $background-color; 
+  font-weight: bold;
+  cursor: pointer;
+}
+.expand-button:hover, .expand-button:focus{
+  background-color: $link-hover-color;
+  border-bottom: 0.2em solid $blue-button-underline-color;
+  padding-bottom: 0.1em;
+}
+@media only screen and (max-width: 40.0625em){
+  .side-heading{
+    margin: 0;// 0 0.5em 0;
+    font-size: 0.9em;
+  }
+  .side-content{
+    font-size: 0.9em;
+  }
+}

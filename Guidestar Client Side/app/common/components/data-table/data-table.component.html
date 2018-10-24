@@ -1,0 +1,73 @@
+<div *ngIf="tableData" class="table-container" [attr.aria-expanded]="isCollapsed" role="table">
+  <div 
+        class="table-header-row" 
+        (click)="toggleTableView()" 
+        (keydown.enter)="toggleTableView()" 
+        [ngStyle]="getHeaderStyle()" 
+        tabindex="0"
+        [attr.aria-label]="isCollapsed ? $Label.Hide : $Label.Show"
+        role="row">
+    <div *ngIf="!headerLevel" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </div>
+    <h2 *ngIf="headerLevel === 'h2'" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </h2>
+    <h3 *ngIf="headerLevel === 'h3'" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </h3>
+    <h4 *ngIf="headerLevel === 'h4'" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </h4>
+    <h5 *ngIf="headerLevel === 'h5'" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </h5>
+    <h6 *ngIf="headerLevel === 'h6'" class="table-header-title" role="columnheader">
+      {{tableTitle}} {{getTitleSeparator()}}
+    </h6>
+    <div class="table-left-align" role="columnheader">
+      <div class="table-header-amount" *ngIf="!hideSum && !isFile && tableData.Sum > 0">
+        {{tableData.Sum | number : '1.0-0'}} ₪
+      </div>
+      <div class="table-header-amount" *ngIf="!hideSum && !isFile && tableData.Sum === 0">
+        {{tableData.Sum }} ₪
+      </div>
+      <div class="table-header-caret">
+        <app-chevron [clicked]="isCollapsed" [state]="isCollapsed ? 'inactive' : 'active'"></app-chevron>
+      </div>
+    </div>
+  </div>
+  <div [@expandCollapse]="state" class="table-data" >
+    <div class="table-data-row" *ngFor="let row of theData" [ngStyle]="getRowStyle()" role="row">
+      <div class="table-data-label" role="gridcell">
+        <span class="table-data-main-label" *ngIf="!isFile" [attr.role]="ariaLevel ? 'heading' : null" [attr.aria-level]="ariaLevel">
+          {{row.MainLabel}}
+        </span>
+        <span *ngIf="!isFile && row.MainLabel && row.SubLabel">
+          {{getRowSeparator()}} 
+        </span>
+        <span class="table-data-sub-label" *ngIf="!isFile">
+          {{row.SubLabel}}
+        </span>
+        <app-linker *ngIf="isFile" 
+                    [label]="row.MainLabel" 
+                    [link]="row.SubLabel" 
+                    [type]="row.Type" 
+                    [internal]="row.InternalLink"
+                    [newTab]="true">
+        </app-linker>
+      </div>      
+      <div class="table-left-align" role="gridcell">
+        <div class="table-data-amount" *ngIf="row.Amount > 0" [ngStyle]="{'font-weight': normalSum ? 'normal' : 'bold'}">
+          {{row.Amount | number : '1.0-0'}} ₪
+        </div>
+        <div class="table-data-amount" *ngIf="row.Amount === 0" [ngStyle]="{'font-weight': normalSum ? 'normal' : 'bold'}">
+          {{row.Amount }} ₪
+        </div>
+        <div class="table-row-caret">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

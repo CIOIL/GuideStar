@@ -1,0 +1,28 @@
+<div class="long-text-container" #longTextContainer (click)="toggleExpand($event)" (keydown.Enter)="toggleExpand($event)" tabindex="0" [attr.aria-expanded]="longTextState === 'expanded'">
+  <div  *ngIf="htmlBody"
+      [@expandCollapse]="{value: longTextState, params:{min_height: minHeight, max_height: maxHeight}}" 
+      [ngClass]="getClasses()" 
+      [innerHtml]="htmlBody">
+  </div>
+  <div *ngIf="!htmlBody"
+      [@expandCollapse]="{value: longTextState, params:{min_height: minHeight, max_height: maxHeight}}" 
+      [ngClass]="getClasses()">
+      <ng-content></ng-content>
+  </div>
+  <div *ngIf="(showButton$ | async) && showLargeButton" class="long-text-section-expander" aria-hidden="true">
+    <div class="long-text-section-expander-button long-text-expand-button" *ngIf="longTextState === 'collapsed'" aria-hidden="true">
+      {{$Label.More}}
+    </div>
+    <div class="long-text-section-expander-button long-text-collapse-button" *ngIf="longTextState === 'expanded'" aria-hidden="true">
+      {{$Label.Less}}
+    </div>
+  </div>
+  <div *ngIf="(showButton$ | async) && showSmallButton && !showLargeButton" class="long-text-section-small-expander" aria-hidden="true">
+    <div class="long-text-section-expander-small-button long-text-expand-small-button" *ngIf="longTextState === 'collapsed'" aria-hidden="true">
+      <div class="expander-caret expander-caret-down"></div>
+    </div>
+    <div class="long-text-section-expander-small-button long-text-collapse-small-button" *ngIf="longTextState === 'expanded'" aria-hidden="true">
+      <div class="expander-caret expander-caret-up"></div>
+    </div>
+  </div>
+</div>

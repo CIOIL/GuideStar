@@ -1,0 +1,23 @@
+<div class="malkar-support-container">
+  <h2>{{$Label.Government_Support}}</h2>
+
+  <div class="malkar-support-data-container" *ngIf="malkarGovSupports && malkarGovSupports.govSupports && malkarGovSupports.govSupports.length > 0">
+    <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Government_Support_Spec}}</h3>
+    <div class="malkar-support-content malkar-mobile-small">
+      {{$Label.Government_Support_text}}
+    </div>
+    <div class="malkar-support-tables">
+        <app-data-table-list [tableList]="malkarGovSupports.govSupports" [titleSeparator]="' '" [headerLevel]="'h4'" [ariaLevel]="4" [totalStyle]="{'color' : '#098289'}"></app-data-table-list>
+    </div>
+  </div>
+
+  <div class="malkar-support-data-container" *ngIf="malkarGovSupports && malkarGovSupports.nationalInsuranceSupports && malkarGovSupports.nationalInsuranceSupports.length > 0">
+    <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.National_Insurance_Support}}</h3>
+    <div class="malkar-support-content malkar-mobile-small">
+      {{$Label.National_Insurance_Support_text}}
+    </div>
+    <div class="malkar-support-tables">
+        <app-data-table-list [tableList]="malkarGovSupports.nationalInsuranceSupports" [titleSeparator]="' '" [headerLevel]="'h4'" [ariaLevel]="4" [totalStyle]="{'color' : '#098289'}"></app-data-table-list>
+    </div>
+  </div>
+</div>

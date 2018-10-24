@@ -1,0 +1,16 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" controller="CTRL_View_File" action="{!findReportsApproval}" cache="false">
+	<html>
+		<head>
+			<meta name="description" content="{!docName}"/>
+  			<link REL="SHORTCUT ICON" HREF="{!URLFOR($Resource.favicon)}"/>
+			<title>{!title}</title>
+		</head>
+		<body>
+			<apex:pageBlock rendered="{!!hasFile}">
+				<h3>{!$Label.Global_DataNotFound}</h3>
+			</apex:pageBlock>
+		   
+			<apex:iframe id="fileFrame" src="{!fileLink}" html-style="height: 99%; width: 99%; position: absolute;" rendered="{!hasFile}" frameborder="0"></apex:iframe>
+		</body>
+	</html>
+</apex:page>

@@ -1,0 +1,43 @@
+<h2>{{$Label.Assets}}</h2>
+<div class="assets-content">
+  <div class="assets-lead assets-mobile-small">
+    {{$Label.Assets_text}}
+  </div>
+  <div class="flex-row-class">
+    <div class="assets-main-content">
+      <div *ngIf="malkarData.hekdeshMoneySum">
+        <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Liquid_Assets_net}}</h3>
+        <div class="assets-section assets-mobile-small">
+          <app-label-value [value]="malkarData.hekdeshMoneySum" [addendum]="malkarData.hekdeshMoneyYear" [isCurrency]="true" [separator]="''"></app-label-value>
+        </div>
+      </div>
+      <div *ngIf="(realEstates$ | async) as realEstateList">
+        <div *ngIf="realEstateList['result'].length>0">
+          <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Real_Estate}}</h3>
+          <div class="assets-section">
+            <long-text [minHeight]="'8.2em'" [showLargeButton]="true">
+              <div *ngFor="let item of realEstateList['result']" class="assets-item assets-mobile-small">
+                <span><b>{{item.Type}},</b> {{$Label.Gush}}: {{item.Gush}}, {{$Label.Helka}}: {{item.Helka}}, {{$Label.TatHelka}}: {{item.TatHelka}}</span>
+              </div>
+            </long-text>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(belongings$ | async) as belongingsList">
+        <div *ngIf="belongingsList['result'].length>0">
+          <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Belongings}}</h3>
+          <div class="assets-section">
+            <long-text [minHeight]="'3.4em'" [showLargeButton]="true">
+              <div *ngFor="let item of belongingsList['result']" class="assets-item assets-mobile-small">
+                {{item.Target}}
+              </div>
+            </long-text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="assets-side-content">
+      <!--<div style="background-color: violet; height: 500px"></div>-->
+    </div>
+  </div>
+</div>

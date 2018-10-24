@@ -1,0 +1,143 @@
+<div class="search-results-page">
+  <h1 class="search-results-header">{{$Label.Search_Results}} 
+    <!--<div class="mobile-hide">
+      {{$Label.Export_to_Excel}} 
+      <i class="fa fa-external-link" tabindex="0" data-toggle="modal" data-target="#exportModal"></i>
+    </div>-->
+    <button id="exportModalButton" (click)="pushEventToDataLayerGTM('exportModalButton')" class="export-link export-link-top mobile-hide" *ngIf="!commonIsRetrievingReport else excelExportStatus" tabindex="0" data-toggle="modal" data-target="#exportModal">
+      <span [attr.aria-label]="$Label.Export_to_Excel" >
+        <img class="linker-icon padding-bottom-0-25" [src]="getBackgroundImageUrl(excelIcon)" alt="excel icon" aria-hidden="true"/>
+        {{$Label.Export_to_Excel}}
+      </span>
+    </button>
+    <ng-template #excelExportStatus>
+      <div id="excelExportStatusButton" class="export-link-top export-status-top mobile-hide" *ngIf="commonIsRetrievingReport && !exportFailed">
+        <!--<i class="fa fa-external-link open-modal" aria-hidden="true" tabindex="0" data-toggle="modal" data-target="#exportModal"></i> &nbsp; -->
+        <i class="fa fa-share-square-o open-modal" (click)="pushEventToDataLayerGTM('excelExportStatusButton')" aria-hidden="true" tabindex="0" data-toggle="modal" data-target="#exportModal"></i> &nbsp; 
+        <span>{{$Label.Retrieved}} &nbsp;</span>
+        <span>{{commonReportLength | async | number : '1.0-0'}} &nbsp;</span>
+        <span *ngIf="displayDownloadLimit()">{{$Label.of}} &nbsp;{{getMinReportResults() | number : '1.0-0'}}&nbsp;</span>
+        <span>{{$Label.Results}}</span>
+      </div>
+    </ng-template>
+  </h1>
+  <div class="search-headline-container">
+    <div class="search-summary" role="status" aria-atomic="true" aria-live="polite">
+      <h2  *ngIf="!(searchMalkarCountLoading$ | async) as loadingMalkarCount; else loadingSeachMalkarCount"  
+            [innerHTML]="getSearchSummaryText()" aria-live="polite">
+        loading...
+      </h2>
+      <ng-template #loadingSeachMalkarCount><app-loader [showLoader]="true" class="count-loader"></app-loader></ng-template>
+    </div>
+    <div *ngIf="!searchResult || !searchWord"
+          class="search-summary" >
+    </div>
+    <app-loader class="mobile-hide" [showLoader]="searchIsSearching"></app-loader>
+    <div class="search-sort-container" #sortConfigElement *ngIf="sortConfig && sortConfig.length > 0">
+      <div class="search-sort-collapsed" tabindex="0" (click)="toggleSort()" (keydown.Enter)="toggleSort()" aria-haspopup="true" [attr.aria-expanded]="showSort || false">
+        <div class="display-always">
+          {{$Label.Sort}}
+        </div>
+        <span class="mobile-hide">
+          {{$Label.Results}}
+        </span>
+        <img class="sort-icon headline-sort-icon" [src]="getBackgroundImageUrl(iconSortDirection)" [attr.alt]="iconSortLabel"/>
+      </div>
+      <div class="search-sort-expanded" [ngStyle]="{'display': showSort ? 'block' : 'none'}" (keydown.Escape)="toggleSort()">
+        <div class="search-sort-option" *ngFor="let item of sortConfig" [ngStyle]="{'font-weight': item.apiName === sortItem?.apiName ? 'bold' : 'normal'}" (click)="setSortItem(item)" (keydown.Enter)="setSortItem(item)" tabindex="0">
+          {{item.label}}
+        </div>
+        <div class="search-sort-direction-container">
+          <div class="search-sort-direction" (click)="toggleSortDirection('up')" (keydown.Enter)="toggleSortDirection('up')" [ngStyle]="{'font-weight': !sortItem?.sortDesc ? 'bold' : 'normal'}" tabindex="0">
+            <img class="sort-icon" [src]="getBackgroundImageUrl(iconSortUp)"/>            
+            {{$Label.Sort_up}}
+          </div>
+          <div class="search-sort-direction" (click)="toggleSortDirection('down')" (keydown.Enter)="toggleSortDirection('down')" [ngStyle]="{'font-weight': !sortItem?.sortDesc ? 'normal' : 'bold'}" tabindex="0">
+           <img class="sort-icon" [src]="getBackgroundImageUrl(iconSortDown)"/>
+            {{$Label.Sort_down}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search-results-container">
+      <div class="search-filter" #searchFilterElement [ngClass]="{'search-filter-expanded': displayFilter, 'search-filter-collapsed': !displayFilter}">      
+        <!--
+          (initSearchFiltersObservable)="initSearchFiltersObservable($event)"
+          [initSearchFilter]="selectedSearchFilters"
+        -->
+        <app-search-filter  #searchFilterComponent
+                            [filterConfig]="filterConfig" 
+                            [storeKey]="commonFilterState"
+                            
+                            (displayed)="toggleFilter($event)"
+                            (scrollFilter)="scrollFilter($event)">
+        </app-search-filter>
+      </div>
+    <div id="searchResults" class="search-results" *ngIf="searchResult && searchResult.length > 0; else noResultsFound">
+      <div class="screenreader-only" role="status" aria-atomic="true" aria-live="polite">
+        <div *ngIf="searchIsSearching" >
+          {{$Label.Loading_data}}
+        </div>
+      </div>
+      <app-search-result [filter]="selectedSearchFilters" [result]="searchResult" [loading]="searchIsSearching" [searchWord]="searchWord" (onLast)="loadMore($event)"></app-search-result>
+      <!--<app-search-result [filter]="selectedSearchFilters" [result]="searchResult" [loading]="searchIsSearching"></app-search-result>-->
+      <!--<button *ngIf="searchResult && searchResult.length > 0 && !searchMalkarIsLast" (click)="loadMore(searchResult[searchResult.length - 1])" [innerHtml]="$Label.AdditionalResults">
+      </button>-->
+      <div class="search-results-more-container" *ngIf="searchResult && searchResult.length > 0 && !searchMalkarIsLast">
+        <div class="search-results-more" (click)="clickLoadMore(searchResult[searchResult.length - 1])" (keydown.Enter)="clickLoadMore(searchResult[searchResult.length - 1])" tabindex="0">
+          <div class="search-results-more-label">
+            {{$Label.AdditionalResults}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noResultsFound>
+      <div class="no-results" *ngIf="!searchIsSearching">
+        {{$Label.No_Results_Found}}
+        <span class="no-results-reset" (click)="resetSearchFilter()">{{$Label.Click_to_reset}}</span>
+      </div>
+    </ng-template>
+  </div>
+  <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="export-modal-body-header">
+          {{$Label.Export_excel_modal_header}}
+        </div>
+        <div class="modal-body">
+          <div *ngIf="!searchLoadingMalkarCount; else loadingSeachMalkarCount" [innerHTML]="getSearchSummaryText()"></div>
+          <span *ngIf="displayAltDownloadLink()">{{$Label.Can_get_malkar_report}}</span>
+          <a *ngIf="displayAltDownloadLink()" (click)="closeModal()" [routerLink]="['/', 'page', 'report']">{{$Label.Can_get_malkar_report_link}}</a>
+          <div *ngIf="!displayAltDownloadLink()">
+            <div class="export-modal-text">
+              {{$Label.Export_to_Excel_text}} 
+              <a target="_blank" [routerLink]="['/', 'page', 'ReportReservations']">{{$Label.Report_reservations}}</a>.
+            </div>
+            <div class="export-modal-status" *ngIf="commonIsRetrievingReport && !exportFailed">
+              <span>{{$Label.Retrieved}} &nbsp;</span>
+              <span>{{commonReportLength | async | number : '1.0-0'}} &nbsp;</span>
+              <span *ngIf="displayDownloadLimit()">{{$Label.of}} &nbsp;{{getMinReportResults() | number : '1.0-0'}}&nbsp;</span>
+              <span>{{$Label.Results}}</span>
+            </div>
+            <app-loader [showLoader]="commonIsRetrievingReport"></app-loader>
+            <div *ngIf="commonIsRetrievingReport && !exportFailed" class="modal-cancel export-modal-status" tabindex="0" (click)="stopExport()" (keydown.Enter)="stopExport()">{{$Label.Export_excel_cancel}}</div>
+            <div *ngIf="exportFailed" class="export-modal-status">{{$Label.Went_wrong_try_again}}</div>
+            <div [ngClass]="{'modal-recaptcha': true, 'screenreader-only': (captchaToken && !isCaptchaExpired) || commonIsRetrievingReport}">
+              <re-captcha [site_key]="googleRecaptchaPublicKey" (captchaResponse)="handleCorrectCaptcha($event)" (captchaExpired)="captchaExpired()"></re-captcha>
+            </div>
+            <div class="export-link-container">
+              <div class="modal-cancel modal-close-link" (click)="cancelExport()" (keydown.Enter)="cancelExport()" tabindex="0">{{$Label.Cancel}}</div>
+              <button id="exportToExcelButton" (click)="pushEventToDataLayerGTM('exportToExcelButton')" *ngIf="!commonIsRetrievingReport" [ngClass]="{'export-link': true, 'export-link-modal': true, 'export-link-inactive': !captchaToken || isCaptchaExpired || searchLoadingMalkarCount}" tabindex="0" (click)="exportResults()" (keydown.Enter)="exportResults()" role="button" [attr.aria-label]="">
+                <span [attr.aria-label]="$Label.Export_to_Excel">
+                  <img class="linker-icon padding-bottom-0-125" [src]="getBackgroundImageUrl(excelIcon)" alt="excel icon" aria-hidden="true"/>
+                  {{$Label.Export_to_Excel}}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

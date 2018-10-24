@@ -1,0 +1,45 @@
+<div class="malkar-volunteering-container">
+  <h2>{{$Label.Volunteering}}</h2>
+  <div class="malkar-volunteering-content malkar-mobile-small">
+      <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="malkar.volunteers" [label]="$Label.Num_Volunteers" [value]="malkar.volunteers" [isNumber]="true" [addendum]="malkar.lastAddDataYear"></app-label-value>
+      <app-linker *ngIf="malkar.greenInfo && malkar.greenInfo.volunteeringUrl"
+                    class=""
+                    [label]="$Label.Volunteering_WebsiteLink" 
+                    [link]="malkar.greenInfo.volunteeringUrl" 
+                    [type]="'link'" 
+                    [newTab]="true"></app-linker>
+  </div>
+
+  <div class="malkar-volunteering-content" *ngIf="malkar">
+
+    <div class="malkar-volunteering-section" *ngIf="malkar.isApprovedAsExperiencePlace">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Volunteering_Project}}</h3>
+      <div class="malkar-volunteering-info malkar-mobile-small">
+        <app-boolean-indicator [customStyle]="getLabelValueStyle()" [isChecked]="true" [label]="$Label.Volunteering_Project_Detail"></app-boolean-indicator>
+        
+        <app-linker class="" [label]="$Label.Volunteering_MinistryLinkHelper" 
+                      [link]="$Label.Volunteering_MinistryLink" 
+                      [type]="'link'" 
+                      [newTab]="true"></app-linker>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="volunteerProjects && volunteerProjects.length>0">
+    <div class="volunteer-projects-title">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Org_volunteer_projects}}</h3>
+    </div>
+    <div class="volunteer-projects-text malkar-mobile-small">
+      {{$Label.Org_volunteer_projects_text}}
+    </div>
+    <div *ngFor="let project of volunteerProjects" class="project-list malkar-mobile-small">
+      <h4>{{project.Name}}</h4>
+      <div>{{project.Description}}</div>
+      <div class="project-link-button-container">
+        <div class="project-link-button">
+          <a [href]="project.Link" target="blank">{{$Label.GSTAR_Signup}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="boolean-indicator-container" [ngStyle]="customStyle">
+  <!--<div class="boolean-indicator-ico" *ngIf="isChecked" [ngStyle]="getBackgroundImageObject(icoChecked)"></div>-->
+  <img class="boolean-indicator-ico" *ngIf="isChecked" [src]="getBackgroundImageUrl(icoChecked)" [attr.alt]="$Label.Has"/>
+  <!--<div class="boolean-indicator-ico" *ngIf="!isChecked" [ngStyle]="getBackgroundImageObject(icoUnchecked)"></div>-->
+  <img class="boolean-indicator-ico" *ngIf="!isChecked" [src]="getBackgroundImageUrl(icoUnchecked)" [attr.alt]="$Label.Has_Not"/>
+  <div class="boolean-indicator-label">
+    {{label}}
+  </div>
+  <div *ngIf="titleText">
+    <app-info-icon [label]="titleText" [position]="tooltipPosition"></app-info-icon>
+  </div>
+</div>

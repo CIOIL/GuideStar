@@ -1,0 +1,60 @@
+@import "../assets/scss/params.scss";
+
+:host{
+    direction: rtl;
+}
+.skip-to-content{
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.skip-to-content:focus, .skip-to-content:active, .skip-to-content:hover{
+  right: 50px; 
+  top: 0;
+  width: auto; 
+  height: auto; 
+  overflow: visible; 
+  position: relative;
+}
+.page-container{
+  display: flex;
+  justify-content: center;
+  flex: 1 0 auto;
+  min-height: calc(100vh - 172px);
+}
+
+.page-content{
+  max-width: $page-content-width;
+  padding: 0 0.625em 0.625em 0.625em;
+  width: 100%;
+  // margin: 0 2em 0 2em;
+}
+
+.app-footer-container{
+  position: relative;
+  bottom: 0;
+  margin: 5em 0 0 0;
+}
+
+.mobile-show{
+  display: none;
+}
+.mobile-hide{
+  display: block;
+}
+
+@media only screen and (max-width: 40.0625em){
+  .mobile-show{
+    display: block;
+  }
+  .mobile-hide{
+    display: none;
+  }
+  .page-content{
+    padding: 0;
+    margin: 0;
+  }
+}

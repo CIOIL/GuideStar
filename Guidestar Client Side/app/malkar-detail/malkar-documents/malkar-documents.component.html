@@ -1,0 +1,60 @@
+<div class="malkar-docs-container">
+  <h2>{{$Label.Documents_and_Reports}}</h2>
+  <div class="malkar-docs-content malkar-mobile-small">
+    {{$Label.Documents_and_Reports_text}}
+  </div>
+  <div class="malkar-docs-data-container malkar-docs-section" *ngIf="malkarDocuments">
+    <div class="malkar-docs-one-column" *ngIf="malkarDocuments.regCertificate || (malkarDocuments.annualTakins && malkarDocuments.annualTakins.length > 0)">
+      <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Official_Docs}}</h3>
+      <div class="malkar-docs-link">
+        <app-linker *ngIf="malkarDocuments.regCertificate"
+                    [label]="malkarDocuments.regCertificate.MainLabel" 
+                    [link]="malkarDocuments.regCertificate.SubLabel" 
+                    [type]="malkarDocuments.regCertificate.Type"
+                    [newTab]="true">
+        </app-linker>
+      </div>
+      <div *ngIf="malkarDocuments.annualTakins">
+        <div class="malkar-docs-link" *ngFor="let doc of malkarDocuments.annualTakins">
+          <app-linker 
+                      [label]="doc.MainLabel" 
+                      [link]="doc.SubLabel" 
+                      [type]="doc.Type"
+                      [newTab]="true">
+          </app-linker>
+        </div>
+      </div>
+    </div>
+    <div class="malkar-docs-one-column" *ngIf="malkarDocuments.malkarUserDocuments && malkarDocuments.malkarUserDocuments.length > 0">
+      <h3>
+        <i class="h3-vertical-bar">&nbsp;|&nbsp;</i>
+        {{$Label.Non_official_docs}}
+        <app-info-icon [label]="$Label.Tooltip_Non_official_docs" [position]="'right'"></app-info-icon>
+      </h3>
+      <div class="malkar-docs-link" *ngFor="let doc of malkarDocuments.malkarUserDocuments">
+        <app-linker 
+                    [label]="doc.MainLabel" 
+                    [link]="doc.SubLabel" 
+                    [type]="doc.Type"
+                    [newTab]="true">
+        </app-linker>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="malkarDocuments && malkarDocuments.tbyData" class="malkar-docs-tables">
+      <app-data-table-list class="mobile-hide" [tableList]="malkarDocuments.tbyData" [isFile]="true" [hideSum]="true" [headerLevel]="'h3'"></app-data-table-list>
+      <app-data-table-list class="mobile-show" [tableList]="malkarDocuments.tbyData" [isFile]="true" [hideSum]="true" [rowStyle]="{'border' : 'none'}"></app-data-table-list>
+  </div>
+  <div class=" malkar-docs-section ">
+    <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Order_dossier_online}}</h3>
+    <div class="malkar-mobile-small" style="padding: 0.5em 0.5em 0 0;">{{$Label.Order_dossier_online_text}}</div>
+    <div style="padding: 0.5em 0.5em 0 0;">
+      <app-linker 
+                  [label]="$Label.Order_dossier" 
+                  [link]="$Label.Order_Amuta_folder" 
+                  [type]="'link'"
+                  [newTab]="true">
+      </app-linker>
+    </div>
+  </div>
+</div>

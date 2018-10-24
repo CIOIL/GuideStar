@@ -1,0 +1,69 @@
+<div class="auto-complete-input-wrapper" #autoCompleteWrapper>
+  <div class="auto-complete-container">
+    <div  
+        #ngContentWrapper
+        (keydown.ArrowDown)="arrowDownHit($event)"
+        (keydown.ArrowUp)="arrowUpHit($event)"
+        (keydown.Escape)="clearResults()"
+        (keydown.Enter)="itemSelected($event)"
+        (click)="clicked($event)"
+        [ngStyle]="{'margin-bottom': topOffset ? topOffset : ''}">
+    <ng-content></ng-content>
+    </div>
+    <div class="auto-complete-result" *ngIf="loading && !_.startsWith(searchWord, lastSearchWord)"><app-loader [showLoader]="true" class="auto-complete-item-wrapper"></app-loader></div>
+
+    <!--List--> 
+    <div 
+        class="auto-complete-result" 
+        *ngIf="showListResults()" 
+        [ngStyle]="{'width': '100%', 'max-height': maxHeight, 'font-size': fontSize, 'position' : posRelative ? 'relative' : 'absolute'}"
+        role="listbox"
+        aria-atomic="true" 
+        aria-live="polite"
+        [attr.aria-label]="$Label.Autocomplete_text">
+      <div
+          #autoCompleteResultItems
+          class="auto-complete-item-wrapper" 
+          *ngFor="let res of result | filter:searchWord:searchList.length;  trackBy: trackByFunc; let i = index;" 
+          (click)="itemSelected($event, res)"
+          (keydown.Enter)="itemSelected($event, res)"
+          (keydown.ArrowDown)="arrowDownHit($event, i)"
+          (keydown.ArrowUp)="arrowUpHit($event, i)"
+          (keydown.Escape)="clearResults()"
+          tabindex="0"
+          role="option">
+        <div class="auto-complete-item" *ngIf="res.label" [appMarker]="searchWord" [innerHTML]="res.label"></div>
+        <div class="auto-complete-item" *ngIf="!res.label" [appMarker]="searchWord" [innerHTML]="res"></div>
+      </div>
+    </div>
+
+    <!--MAP-->
+    <div
+        class="auto-complete-result"
+        *ngIf="showMapResults()"
+        [ngStyle]="{'width': componentWidth, 'max-height': maxHeight, 'font-size': fontSize, 'position' : posRelative ? 'relative' : 'absolute'}"
+        role="listbox"
+        aria-atomic="true" 
+        aria-live="polite"
+        [attr.aria-label]="$Label.Autocomplete_text">
+      <div class="auto-complete-section" *ngFor="let key of keys"> 
+        <span class="auto-complete-key" *ngIf="key && result[key] && result[key].length > 0" [ngStyle]="{'padding-right' : rightOffset ? rightOffset : null}">{{key}}</span>
+        <div
+            #autoCompleteResultItems
+            class="auto-complete-item-wrapper" 
+            *ngFor="let value of result[key] | filter:searchWord:searchList.length;  trackBy: myTrackByFunc; let i = index; let first=first;"
+            (click)="itemSelected($event, value)"
+            (keydown.Enter)="itemSelected($event, value)"
+            (keydown.ArrowDown)="arrowDownHit($event, i, autoCompleteResultItems)"
+            (keydown.ArrowUp)="arrowUpHit($event, i, autoCompleteResultItems)"
+            (keydown.Escape)="clearResults()"
+            tabindex="0"
+            role="option">
+          <!--<div *ngIf="first" class="auto-complete-aria" aria-atomic="true" role="alert" aria-live="polite" [attr.aria-label]="$Label.Autocomplete_text"></div>-->
+          <div class="auto-complete-item" [ngStyle]="{'padding-right' : rightOffset ? rightOffset : null}" *ngIf="value.label" [appMarker]="searchWord" [innerHTML]="value.label"></div>
+          <div class="auto-complete-item" [ngStyle]="{'padding-right' : rightOffset ? rightOffset : null}" *ngIf="!value.label" [appMarker]="searchWord" [innerHTML]="value"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

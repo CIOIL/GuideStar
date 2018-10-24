@@ -1,0 +1,2 @@
+<!--<div #recaptcha class="g-recaptcha" [data-sitekey]="Google_recaptcha_publicKey"></div>-->
+<re-captcha [site_key]="googleRecaptchaPublicKey" (captchaResponse)="handleCorrectCaptcha($event)" (captchaExpired)="captchaExpired()"></re-captcha>

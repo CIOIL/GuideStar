@@ -1,0 +1,97 @@
+@import "../../../../assets/scss/params.scss";
+
+.mobile-show{
+  display: none;
+}
+.desktop-show{
+  display: block;
+}
+.picklist-container{
+  position: relative;  
+  width: 100%;
+}
+.picklist-input{
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;  
+  padding: 0.5em;
+}
+.picklist-caret{
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 1;
+  border-top: 8px solid $contact-input-border-color;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.picklist-section{
+  color: $auto-complete-title-color;
+  display: block;
+  border-bottom: 1px solid $auto-complete-separator-color; 
+  margin-top: 0.5em;
+  font-weight: bold;
+}
+.picklist-section:before{
+  content: '';
+  padding-right: 0.5em;
+}
+.picklist-item{
+  border: 0px;
+  list-style-type: none; 
+  padding: 0.25em 0.625em 0.4375em 0;
+  display: block;
+  font-weight: normal;
+  color: $font-color;
+}
+.picklist-result{
+  position: absolute;
+  border: 1px solid $auto-complete-border-color;
+  list-style-type: none;
+  box-shadow: 0 2px 2px $box-shadow-color;
+  box-sizing: border-box;
+  background-color: $background-color;
+  overflow-x: auto;
+  width: 100%;
+}
+.picklist-item-wrapper{
+  cursor: pointer;
+}
+
+.picklist-item-wrapper:hover,  .picklist-item-wrapper:focus{
+  background-color: $auto-complete-background-hover-color;
+  outline: none;
+ }
+
+@media only screen and (max-width: 40.0625em){
+  .mobile-show{
+    display: block;
+  }
+  .desktop-show{
+    display: none;
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+  .select-wrapper select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+  }
+  .select-wrapper:after{
+    content: ' ';
+    color: $menu-background-color;
+    font-size: 0.727272em;
+    position: absolute;
+    // width: 1em;
+    // height: 1em;
+    border-top: 8px solid $menu-background-color;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    top: 1.5em;
+    left: 1em;
+  }
+ }

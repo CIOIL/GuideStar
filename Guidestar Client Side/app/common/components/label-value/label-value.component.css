@@ -1,0 +1,27 @@
+.label-value-container{
+  /*display: flex;
+  flex-direction: row;*/
+  width: 100%;
+}
+/*.label-value-separator:after{
+  content: " ";
+  white-space: pre;
+}*/
+/*.label-value-label{*/
+  /*flex-grow: 1;*/
+  /*white-space: nowrap;*/
+/*}*/
+.label-value-value{
+  font-weight: bold;
+  /*white-space: nowrap;*/
+  /*flex-grow: 1;*/
+}
+
+@media only screen and (max-width: 40.063em){
+  /*.label-value-container{
+    flex-direction: column;
+  }
+  .label-value-separator{
+    display: none;
+  }*/
+}

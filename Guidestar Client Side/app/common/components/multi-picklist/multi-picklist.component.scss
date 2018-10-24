@@ -1,0 +1,137 @@
+@import "../../../../assets/scss/params.scss";
+
+.multi-picklist-container{
+  overflow: hidden;
+  position: relative;
+}
+.multi-picklist-container:focus{
+  // background-color: $search-sort-background-color;
+  outline: none;//2px solid $multi-picklist-selected-border-color;
+}
+.multi-picklist-container-expanded:focus{
+  outline: none;
+}
+.multi-picklist-heading{
+  display: flex;
+  align-content: flex-start;
+  border: 1px solid $multi-picklist-default-border-color;
+  height: 2em;
+  cursor: pointer;
+  align-items: center;
+}
+.multi-picklist-heading:focus{
+  outline: none;
+}
+.multi-picklist-heading:focus{
+  background-color: $input-focus-color;
+  // border: 2px solid $multi-picklist-selected-border-color;
+}
+.multipicklist-heading-legend{
+  flex-grow: 1;
+}
+.multi-picklist-title{
+  display: flex;
+  margin: 0.25em 0.5em 0.25em 0.5em;
+  align-items: center;
+  // flex-grow: 1;
+}
+.multi-picklist-reset{
+  border: 1px solid $multi-picklist-reset-color;
+  border-radius: 50%;
+  width: 0.75em;
+  height: 0.75em;
+  position: relative;
+  margin: 0.1em 0.5em 0 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.multi-picklist-reset-lines{
+  position: absolute;
+  border-left: 2px solid $multi-picklist-reset-color;
+  height: 0.5em;
+}
+.multi-picklist-reset-line-1{
+  transform: rotate(45deg);  
+}
+.multi-picklist-reset-line-2{
+  transform: rotate(-45deg);
+}
+.multi-picklist-reset:hover, .multi-picklist-reset:focus{
+  background-color: $multi-picklist-reset-color;
+}
+.multi-picklist-reset:hover .multi-picklist-reset-lines, .multi-picklist-reset:focus .multi-picklist-reset-lines{
+  border-color: $background-color;
+}
+.multi-picklist-num-selected{
+  margin: 0 0.5em 0 0;
+  color: $multi-picklist-item-selected-num-color;
+}
+.multi-picklist-arrow-container{
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.multi-picklist-arrow{
+  color: $multi-picklist-arrow-color;
+  margin: 0.25em 0 0.25em 0.5em;
+}
+.multipicklist-open{
+  // max-height: 10em;
+  // overflow-y: auto;
+  border: 1px solid $multi-picklist-default-border-color;
+  border-top: none;
+  background-color: $background-color;
+  opacity: 1 !important;
+}
+.multi-picklist-checkbox{
+  display: flex;
+  flex-flow: column wrap;
+  padding: 0.25em 0 0.25em 0.5em;
+  // height: 2em;
+  justify-content: center;
+}
+.multi-picklist-checkbox:hover,  .multi-picklist-checkbox:focus{
+  background-color: $multi-picklist-item-hover-bg-color;
+  outline: none;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  .multi-picklist-reset{
+    border: 1px solid $multi-picklist-reset-color;
+    border-radius: 50%;
+    width: 0.75em;
+    height: 0.75em;
+    position: relative;
+    margin: 0.1em 0.5em 0 0;
+  }
+  .multi-picklist-reset-line-1{
+    position: absolute;
+    top: 0.12em;
+    right: 0.32em;
+  }
+  .multi-picklist-reset-line-2{
+    position: absolute;
+    top: 0.1em;
+    right: 0.3em;
+  }
+}
+
+@media only screen and (max-width: 40.065em){
+  .multi-picklist-container:focus, .multi-picklist-container:hover{
+    background-color: $background-color;
+  }
+  .multi-picklist-heading:hover, .multi-picklist-heading:focus{
+    background-color: $background-color;
+  }
+  .multi-picklist-checkbox:hover,  .multi-picklist-checkbox:focus{
+    background-color: $background-color;
+  }
+  .multi-picklist-reset:hover, .multi-picklist-reset:focus{
+    background-color: $background-color;
+  }
+  .multi-picklist-reset:hover .multi-picklist-reset-lines, .multi-picklist-reset:focus .multi-picklist-reset-lines{
+    border-color: $multi-picklist-reset-color;
+  }
+}

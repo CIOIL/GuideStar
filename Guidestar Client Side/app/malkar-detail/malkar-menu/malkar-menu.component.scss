@@ -1,0 +1,90 @@
+@import "../../../assets/scss/params.scss";
+
+.malkar-menu-desktop{
+  display: flex;
+  flex-flow: column;
+}
+.malkar-menu-mobile{
+  display: none;
+}
+.malkar-menu-container{
+  width: 12.75em;
+  position: sticky;
+  top: 11em;
+  margin: 0 0 0 2.625em;
+}
+.malkar-menu-item:first-of-type{
+  border-top: 1px dashed $malkar-detail-menu-item-border-color;
+}
+.malkar-menu-item{
+  font-size: 1.125em;
+  color: $malkar-detail-menu-item-color;
+  border-bottom: 1px dashed $malkar-detail-menu-item-border-color;
+  cursor: pointer;
+  padding: 0.4444em 0.8333em 0.4444em 0;
+}
+.malkar-menu-item:hover, .malkar-menu-item:focus{
+  background-color: $malkar-detail-menu-item-hover-bg-color;
+  font-weight: normal;
+  color: $font-color;
+  outline: none;
+}
+.malkar-menu-item:active{
+  background-color: $malkar-detail-menu-item-active-bg-color;
+  border-bottom: 1px solid transparent;
+}
+.malkar-menu-item-active{
+  background-color: $malkar-detail-menu-item-current-bg-color;
+  font-weight: bold;
+  color: $background-color;
+  border-bottom: 1px solid transparent;
+}
+.bottom-border-transparent{
+  border-bottom: 1px solid transparent !important;
+}
+.top-border-transparent{
+  border-top: 1px solid transparent !important;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-menu-container{
+    margin: 0 0 0 0.625em;    
+  }
+}
+@media only screen and (max-width: 40.0625em){
+  .malkar-menu-desktop{
+    display: none;
+  }
+  .malkar-menu-mobile{
+    display: block;
+  }
+  .malkar-menu-container{
+    margin: 0;
+    width: 100%;
+  }
+  .malkar-menu-item{
+    display: none;
+  }
+  .malkar-menu-item-active{
+    display: block;
+  }
+  .malkar-menu-item:hover, .malkar-menu-item:focus{
+    background-color: $malkar-detail-menu-item-current-bg-color;
+    font-weight: bold;
+    color: $background-color;
+    outline: none;
+  }
+  .malkar-menu-item-active::after{
+    content: '';
+    position: absolute;
+    width: 0.4em;
+    height: 0.4em;
+    background: transparent;
+    top: 0.7em;
+    left: 1em;
+    border: 0.1875em solid $background-color;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+  }
+}

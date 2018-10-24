@@ -1,0 +1,14 @@
+<h2>{{$Label.Trustees}}</h2>
+<div class="trustees-content">
+  <div class="trustees-section trustees-mobile-small">
+    {{$Label.Trustees_text}}
+  </div>
+  <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Contact_info}}</h3>
+  <div *ngIf="(trustees$ | async) as trusteeList" class="trustee-list">
+    <div *ngFor="let trustee of trusteeList['result']" class="trustees-section trustee-item trustees-mobile-small">
+      <app-label-value *ngIf="trustee.ContactName" [customStyle]="{'margin': '0 0 0.3em 0'}" [label]="$Label.Name" [value]="trustee.ContactName"></app-label-value>
+      <app-label-value *ngIf="trustee.ContactMailingAddress" [customStyle]="{'margin': '0 0 0.3em 0'}" [label]="$Label.Address" [value]="trustee.ContactMailingAddress"></app-label-value>
+      <!--<app-label-value *ngIf="trustee.ContactEmail" [customStyle]="{'margin': '0 0 0.3em 0'}" [label]="$Label.Email" [value]="trustee.ContactEmail"></app-label-value>-->
+    </div>
+  </div>
+</div>

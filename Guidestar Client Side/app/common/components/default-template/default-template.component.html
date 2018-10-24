@@ -1,0 +1,14 @@
+<div class="default-template-container" *ngIf="mainContent && mainContent.length > 0">
+  <h1 class="main-heading">{{mainContent[0].H1}}</h1>
+  <div class="default-template-content">
+    <div class="default-main-container">
+      <!--<div class="default-template-main-content" *ngFor="let content of mainContent" [innerHtml]="content.Body">-->
+      <!--<div class="default-template-main-content" *ngFor="let content of mainContentBody" [innerHtml]="content | safeHtml">
+      </div>-->
+      <app-main-content *ngFor="let content of mainContent; let first=first;" [content]="content" [hideTitle]="first"></app-main-content>
+    </div>
+    <div class="default-template-side-panel">
+      <app-side-content *ngFor="let content of sideContent" [content]="content"></app-side-content>
+    </div>
+  </div>
+</div>

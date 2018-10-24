@@ -1,0 +1,9 @@
+<ul *ngIf="result && result.length > 0" class="search-result-item-list">
+  <li *ngFor="let resultItem of result; trackBy: trackByFunc; let i = index; let last = last" class="search-result-item">
+    <app-search-result-item [item]="resultItem" [isLast]="last" [searchWord]="searchWord" (onLast)="loadMore($event)">
+    </app-search-result-item>
+  </li>
+</ul>
+<!--<p *ngIf="loading">
+  loading...
+</p>-->

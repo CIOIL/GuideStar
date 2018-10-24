@@ -1,0 +1,65 @@
+<div class="search-result-item-wrapper">
+<div class="search-result-item-container">
+  <div class="search-result-item-main-block">
+    <a [routerLink]="['/', pages.malkar, item.regNum]" (keydown.Enter)="itemSelected($event)">
+      <h2 class="search-result-item-name"
+            [appMarker]="searchWord" 
+            [innerHTML]="item.Name"
+            [appMarkerPrefixHtml]="getNamePrefixHtml()" 
+            [appMarkerSuffixHtml]="'</b>'">
+      </h2>
+    </a>
+    <long-text [minHeight]="'2.9em'" [maxHeight]="'15em'" [showSmallButton]="true" [scrollOffset]="180">{{item.orgGoal}}</long-text>
+    <div class="search-result-item-activity-container">  
+      <app-label-value *ngIf="areaValue"
+        class="search-result-item-data mobile-hidden"
+        [label]="areaLabel" 
+        [value]="areaValue | stringifyList"
+        [ariaLevel]="'3'">
+      </app-label-value>
+      <app-label-value  *ngIf="item.tchumPeilutSecondary  && item.tchumPeilutSecondary.length > 0"
+        class="search-result-item-data mobile-hidden"
+        [label]="$Label.MainClassification" 
+        [value]="item.tchumPeilutSecondary | stringifyList"
+        [ariaLevel]="'3'">
+      </app-label-value>
+    </div>
+  </div>
+  <div class="search-result-item-side-block">
+    <div class="search-result-item-side-block-list-container">
+      <div class="search-result-item-side-block-list">
+        <app-label-value 
+          class="search-result-item-data"
+          [label]="$Label.MalkarType" 
+          [value]="item.sugHitagdutLabel"
+          [ariaLevel]="'3'">
+        </app-label-value>
+        <app-label-value 
+          *ngIf="item.turnover"
+          class="search-result-item-data"
+          [label]="$Label.Turnover" 
+          [value]="item.turnover"
+          [isCurrency]="true">
+        </app-label-value>
+      </div>
+      <div class="search-result-item-side-block-list">
+        <app-boolean-indicator *ngIf="item.showProperManagement" class="search-result-item-data" [isChecked]="item.hasProperManagement" [label]="$Label.Nihul_Takin">
+        </app-boolean-indicator>
+        <app-boolean-indicator *ngIf="item.showApproval46" class="search-result-item-data" [isChecked]="item.approval46" [label]="$Label.Tax_reduction">
+        </app-boolean-indicator>
+        <app-boolean-indicator *ngIf="item.showReports" class="search-result-item-data tablet-hidden mobile-hidden" [isChecked]="item.hasReports" [label]="$Label.AnnualReports">
+        </app-boolean-indicator>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="search-result-item-button-container">
+      <a class="search-result-item-button" [routerLink]="['/', pages.malkar, item.regNum]" (keydown.Enter)="itemSelected($event)" role="button" [attr.aria-label]="$Label.Expand_about + ' ' + item.Name">
+        <div class="search-result-item-button-label">
+          {{$Label.Expand}}
+        </div>
+      </a>
+    </div>
+</div>
+<div *ngIf="isLast" (appear)="lastInView()" >
+</div>

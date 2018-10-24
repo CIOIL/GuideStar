@@ -1,0 +1,13 @@
+<a class="linker-container" [href]="link" [target]="getTarget()" *ngIf="link && !internal">
+  <img class="linker-icon" [src]="getBackgroundImageUrl(icon)" [attr.alt]="label" aria-hidden="true"/>
+  <div class="linker-label">{{label}}</div>
+</a>
+<a class="linker-container" [routerLink]="internal" *ngIf="internal">
+  <img class="linker-icon" [src]="getBackgroundImageUrl(icon)" [attr.alt]="label" aria-hidden="true"/>
+  <div class="linker-label">{{label}}</div>
+</a>
+<div class="linker-container" *ngIf="!link && !internal">
+  <img class="linker-icon" [src]="getBackgroundImageUrl(icon)" [attr.alt]="label" aria-hidden="true"/>
+  <div class="linker-label">{{label}}</div>
+  <app-info-icon [label]="$Label.Hidden_Doc_Text" [position]="'top'"></app-info-icon>
+</div>

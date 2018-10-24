@@ -1,0 +1,145 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+h3{
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $malkar-info-h3-color;
+}
+h4{
+  color: $link-color;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.h3-vertical-bar{
+  display: none;
+}
+
+.malkar-volunteering-container{
+  width: 75%;
+}
+
+.malkar-volunteering-content{
+  padding: 0 1.125em 0 0;
+}
+
+.malkar-volunteering-section{
+  padding: 1em 0 1em 0;
+}
+
+.volunteer-projects-title{
+  border-top: 2px solid $table-header-border-color;
+  padding: 0.5em 1.125em 0 0;
+}
+.volunteer-projects-text{
+  border-bottom: 2px solid $table-header-border-color;
+  padding: 0 1.125em 0.5em 0;
+}
+.project-list{
+  padding: 0.5em 1.125em 0 0;  
+  border-bottom: 1px solid $search-result-item-border-color;
+}
+.project-link-button-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+.project-link-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  padding: 0.2em 1em 0.3em 1em;
+  background-color: $search-result-item-button-color;
+  cursor: pointer;
+}
+.project-link-button:hover, .project-link-button:focus{
+  background-color: $link-hover-color;
+  border-bottom: 0.2em solid $blue-button-underline-color;
+  padding-bottom: 0.1em;
+}
+.project-link-button>a{
+  color: $background-color;
+  font-weight: bold;
+}
+.project-link-button>a:hover, .project-link-button>a:focus{
+  text-decoration: none;
+}
+
+a:hover, a:focus{
+  text-decoration: underline;
+}
+
+.mobile-show{
+  display: none;
+}
+.desktop-show{
+  display: flex;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-volunteering-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 40.063em){
+  h2{
+    display: none;
+  }
+  .malkar-volunteering-container{
+    width: 100%;
+  }
+  h3{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    font-size: 1em;
+    padding-top: 0.5em;
+    margin: 0;
+  }
+  h4{
+    font-size: 1.1em;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .h3-vertical-bar{
+    display: inline;
+    color: $home-charts-title-divider-color; 
+    font-style: normal;
+    font-size: 0.727272em;
+    padding: 0.25em 0 0 0;
+  }
+  .malkar-volunteering-info{
+    padding: 0.5em 0.5em 0 0;
+  }
+  .malkar-volunteering-content{
+    padding: 0.5em 0 0 0;
+  }
+  .malkar-volunteering-section{
+    padding: 0;//1em 0.75em 1em 0.75em;
+  }
+  .volunteer-projects-title{
+    padding: 0;
+    margin: 0.5em 0 0 0;
+  }
+  .volunteer-projects-text{
+    padding: 0 0.75em 0.5em 0;
+  }
+  .project-list{
+    padding: 0.5em 0.5em 0 0;
+  }
+
+  .mobile-show{
+    display: flex;
+  }
+  .desktop-show{
+    display: none;
+  }
+}

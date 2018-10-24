@@ -1,0 +1,89 @@
+$custom-popover-font-size: 0.8em !default;
+$custom-popover-color: #ffffff !default;
+$custom-popover-bg-color: #627883 !default;
+$custom-popover-min-width: unset !default;
+$custom-popover-max-width: unset !default;
+$custom-popover-min-height: unset !default;
+$custom-popover-max-height: unset !default;
+$custom-popover-height: unset !default;
+$custom-popover-width: unset !default;
+$custom-popover-offset-top: 2em !default;
+$custom-popover-offset-right: 2em !default;
+$custom-popover-offset-bottom: 2em !default;
+$custom-popover-offset-left: 2em !default;
+$custom-popover-box-shadow-color: #888888 !default;
+.custom-popover{
+  background-color: $custom-popover-bg-color;
+  border-radius: 5px;
+  color: $custom-popover-color;
+  padding: 0.8em;
+  display:none;
+  position: absolute;
+  font-size: $custom-popover-font-size;
+  height: $custom-popover-height;
+  width: $custom-popover-width;
+  min-width: $custom-popover-min-width;
+  max-width: $custom-popover-max-width;
+  min-height: $custom-popover-min-height;
+  max-height: $custom-popover-max-height;
+  box-shadow: 0 2px 2px $custom-popover-box-shadow-color;
+  z-index: 5;
+}
+.custom-popover-top{
+  bottom: $custom-popover-offset-top;
+}
+.custom-popover-top:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: -0.4em;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  border-top: 0.5em solid $custom-popover-bg-color;
+}
+.custom-popover-right{
+  left: $custom-popover-offset-right;
+}
+.custom-popover-right:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0.3em;
+  left: -0.4em;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+  border-right: 0.5em solid $custom-popover-bg-color;
+}
+.custom-popover-bottom{
+  top: $custom-popover-offset-bottom;
+}
+.custom-popover-bottom:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -0.4em;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  border-bottom: 0.5em solid $custom-popover-bg-color;
+}
+.custom-popover-left{
+  right: $custom-popover-offset-left;
+}
+.custom-popover-left:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0.3em;
+  right: -0.4em;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+  border-left: 0.5em solid $custom-popover-bg-color;
+}

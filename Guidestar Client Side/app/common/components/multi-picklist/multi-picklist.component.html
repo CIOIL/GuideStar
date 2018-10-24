@@ -1,0 +1,49 @@
+<fieldset 
+    
+    #multiPicklistContainer 
+    class="multi-picklist-container" 
+    (keydown.enter)="expandPicklist($event)" 
+    [@expandCollapse]="multiPicklistState" 
+    (keydown.Escape)="closeBox()"
+    (keydown.ArrowDown)="arrowDownHit($event)"
+    (keydown.ArrowUp)="arrowUpHit($event)"
+    role="listbox"
+    [attr.aria-expanded]="multiPicklistState === 'collapsed' ? false : true">
+  <div class="multi-picklist-heading"  (click)="expandPicklist($event)" tabindex="0"
+        [ngStyle]="{'border': hideBorders ? 'none' : '1px solid $multi-picklist-default-border-color', 'color' : placeHolderColor}" [style.height]= "titleHeight"
+        aria-haspopup="true" [attr.aria-expanded]="multiPicklistState === 'expanded' || false">
+    <legend class="multipicklist-heading-legend"> 
+      <div class="multi-picklist-title" [style.flex-grow]="tightArrow ? '0' : '1'" role="heading">
+        {{title}}
+        <div class="multi-picklist-num-selected" *ngIf="selectedCount">
+          ({{selectedCount}})
+        </div>
+        <div class="multi-picklist-reset" *ngIf="selectedCount" (keydown.enter)="resetClicked($event)" (click)="resetClicked($event)" tabindex="0" [attr.aria-labelledby]="$Label.Reset">
+          <div class="multi-picklist-reset-lines multi-picklist-reset-line-1"></div>
+          <div class="multi-picklist-reset-lines multi-picklist-reset-line-2"></div>
+        </div>
+      </div>
+    </legend>
+    <div class="multi-picklist-arrow-container">
+      <div [@rotateArrow]='arrowState' class="multi-picklist-arrow">
+        <i class="fa fa-caret-down"></i>
+      </div>
+    </div>
+  </div>
+  <div class="multipicklist-open" *ngIf="picklistItemList && picklistItemList.length > 0" [hidden]="multiPicklistState === 'collapsed'" (keydown.Escape)="closeBox()" #multiPicklist [ngStyle]="{'max-height': maxHeight, 'overflow-y': 'auto'}">
+      <app-checkbox              
+                    #checkboxItems
+                    class="multi-picklist-checkbox" 
+                    [ngStyle]="{'font-size': fontSize}"
+                    *ngFor="let item of picklistItemList; let i = index;"
+                    [fieldName]="item.value"
+                    [label]="item.label" 
+                    [chckbxId]="'multiPicklistChkbx'+title+i" 
+                    [tooltip]="item.tooltip" 
+                    [isChecked]="item.isChecked"
+                    [controlName]="item.value"
+                    [parentFormGroup]="picklistFormGroup"
+                    >
+      </app-checkbox>
+  </div>
+</fieldset>

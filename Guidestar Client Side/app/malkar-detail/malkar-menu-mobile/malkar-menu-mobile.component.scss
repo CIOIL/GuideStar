@@ -1,0 +1,88 @@
+@import "../../../assets/scss/params.scss";
+
+.malkar-menu-container{
+  width: 12.75em;
+  position: sticky;
+  top: 9em;
+  margin: 0 0 0 2.625em;
+}
+.malkar-menu-container:first-child{
+  border-top: 1px solid $table-row-border-color;
+}
+.malkar-menu-item{
+  font-size: 1.125em;
+  color: $malkar-detail-menu-item-color;
+  border-bottom: 1px solid $table-row-border-color;
+  cursor: pointer;
+  padding: 0.4444em 0.8333em 0.4444em 0;
+}
+// .malkar-menu-item:hover, .malkar-menu-item:focus{
+//   background-color: $malkar-detail-menu-item-hover-bg-color;
+//   font-weight: normal;
+//   color: $font-color;
+//   outline: none;
+// }
+.malkar-menu-item:active, .malkar-menu-item-active{
+  background-color: $malkar-detail-menu-item-current-bg-color;
+  font-weight: bold;
+  color: $background-color;
+}
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-menu-container{
+    margin: 0 0 0 0.625em;    
+  }
+}
+@media only screen and (max-width: 40.0625em){
+  .malkar-menu-container{
+    margin: 0;
+    width: 100%;
+  }
+  .malkar-menu-item{
+    position: relative;
+    // border-top: 1px solid $table-row-border-color;
+    border-collapse: collapse;
+    font-size: 1.1em;
+  }
+  .malkar-menu-item::after{
+    content: '';
+    position: absolute;
+    width: 0.4em;
+    height: 0.4em;
+    background: transparent;
+    top: 0.875em;
+    left: 0.75em;
+    border: 0.125em solid $malkar-detail-menu-item-current-bg-color;
+    border-top: none;
+    border-right: none;
+    transform: rotate(45deg);
+  }
+  .malkar-menu-container:first-child{
+    border-top: none;
+  }
+  .malkar-menu-item-active{
+    border: none;
+  }
+  // .malkar-menu-item:hover, .malkar-menu-item:focus{
+  //   background-color: $malkar-detail-menu-item-current-bg-color;
+  //   font-weight: bold;
+  //   color: $background-color;
+  //   outline: none;
+  // }
+  .malkar-menu-item-active::after{
+    content: '';
+    position: absolute;
+    width: 0.4em;
+    height: 0.4em;
+    background: transparent;
+    top: 0.75em;
+    left: 0.75em;
+    border: 0.125em solid $background-color;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+  }
+  .malkar-mobile-display{
+    margin: 0 0 1em 0;
+    padding: 0 0.625em 0 0.625em;
+  }
+}

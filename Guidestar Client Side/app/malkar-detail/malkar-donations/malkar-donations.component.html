@@ -1,0 +1,21 @@
+<div class="malkar-donations-container">
+  <h2>{{$Label.Donations}}</h2>
+  <div class="malkar-donations-content malkar-mobile-small">
+    {{$Label.Donations_text}}
+  </div>
+  <div *ngIf="malkarDonations" class="malkar-donations-tables">
+      <app-data-table-list [tableList]="malkarDonations" [titleSeparator]="' '" [labelSeparator]="',&nbsp;'" [hideSum]="true" [headerLevel]="'h3'"></app-data-table-list>
+  </div>
+  <div class="malkar-mobile-small ">
+    <h3 class="malkar-donations-content"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Order_dossier_online}}</h3>
+    <div class="malkar-donations-content malkar-mobile-small" >{{$Label.Order_dossier_online_text}}</div>
+    <div class="malkar-donations-content">
+      <app-linker 
+                  [label]="$Label.Order_dossier" 
+                  [link]="$Label.Order_Amuta_folder" 
+                  [type]="'link'"
+                  [newTab]="true">
+      </app-linker>
+    </div>
+  </div>
+</div>

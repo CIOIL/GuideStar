@@ -1,0 +1,63 @@
+@import "../../../../assets/scss/params.scss";
+
+.table-list{
+  border-bottom: 2px solid $table-header-border-color;
+}
+.table-mobile-view{
+  display: none;
+}
+
+@media only screen and (max-width: 40.063em){
+  .table-list{
+    display: none;
+  }
+  .table-mobile-view{
+    display: block;
+    margin: 0.5em;
+  }
+  .table-mobile-picklist{
+    margin: 0 0 1em 0;
+  }
+  // .btn{
+  //   border-color: $table-mobile-pulldown-border-color;
+  //   font-weight: bold;
+  //   font-size: 1em;
+  //   width: 100%;
+  // }
+  // .btn-secondary{
+  //   background-color: $table-mobile-pulldown-bg;
+  //   border-radius: 0;
+  //   color: $table-mobile-pulldown-text-color;    
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   white-space: nowrap;
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   box-sizing: border-box;
+  // }
+  // .dropdown-toggle::after {
+  //   color: $table-mobile-pulldown-arrow-color;
+  //   position: relative;
+  //   top: 0.55em;
+  //   border-top: 0.4em solid;
+  //   border-right: 0.4em solid transparent;
+  //   border-bottom: 0;
+  //   border-left: 0.4em solid transparent;
+  // }
+  // .dropdown-menu{
+  //   text-align: initial;
+  // }
+  // .dropdown-item{
+  //   box-sizing: border-box;
+  //   font-size: 2em;
+  // }
+  .table-mobile-sum-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 1px solid $table-row-border-color;
+    padding: 0.5em 0 0.5em 0;
+  }
+}

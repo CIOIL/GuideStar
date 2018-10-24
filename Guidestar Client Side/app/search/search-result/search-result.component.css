@@ -1,0 +1,16 @@
+.search-result-item-list{
+  list-style-type: none;
+  /*display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;*/
+}
+/*.search-result-item{
+  max-width: 48%;
+  padding-right: 1em;
+}*/
+
+@media only screen and (max-width: 40.0625em){
+  .search-result-item-list:first-child{
+    padding-top: 1.5em;
+  }
+}

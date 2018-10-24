@@ -1,0 +1,16 @@
+<div *ngIf="content" role="complementary">
+  <h2 class="side-heading">
+    {{content.Title}}
+  </h2>
+  <div class="side-content">
+    <!--<div [innerHtml]="contentBody | safeHtml"></div>-->
+    <div #sideContent [innerHtml]="contentBody | safeHtml"></div>
+    <div class="expand-button-container">
+      <a class="expand-button" [routerLink]="content.Link" *ngIf="content.Link" role="button" [attr.aria-label]="$Label.Expand_about + ' ' + content.Title">
+        {{$Label.Expand}}
+      </a>
+    </div>
+  </div>
+  <!--<div style="direction: ltr">Content.Body==> {{content.Body}}</div>-->
+  <!--<div style="direction: ltr">contentBody==> {{contentBody}}</div>-->
+</div>

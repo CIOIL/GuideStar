@@ -1,0 +1,10 @@
+<div class="checkbox-wrapper">
+  <div class="checkbox-container" role="checkbox" [attr.aria-checked]="parentFormGroup.controls[controlName].value" tabindex="0" (keydown.space)="checkboxLabelHit($event)" [formGroup]="parentFormGroup">
+    <input #checkboxBox tabindex="-1" type="checkbox" [id]="chckbxId"  [formControlName]="controlName" (change)="onChange($event)"/>
+      <label [for]="chckbxId">
+      <span class="checkbox-box"></span>
+      <span class="checkbox-label">{{label}}</span>
+    </label>
+  </div>
+  <app-info-icon *ngIf="tooltip" [label]="tooltip" [position]="tooltipPosition" style="display: inline-block"></app-info-icon>
+</div>

@@ -1,0 +1,18 @@
+<div class="app-container">
+    <app-loader class="mobile-hide" [showLoader]="loading" [position]="'absolute'" [top]="'85px'" [zIndex]="4"></app-loader>
+    <app-loader class="mobile-show" [showLoader]="loading" [position]="'absolute'" [top]="'45px'" [zIndex]="4"></app-loader>
+    <div id="dummyLink" tabindex="0"></div>
+    <a href="#" (keydown.enter)="skipToContent($event)" (click)="skipToContent($event)" class="skip-to-content">{{$Label.Skip_to_content}}</a>
+    <app-header 
+        [menuItems]="menuItems"
+        [sideItems]="sideItems">
+    </app-header>
+  <div class="page-container" id="mainContent" role="main">
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="app-footer-container">
+    <app-footer></app-footer>
+  </div>
+</div>

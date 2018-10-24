@@ -1,0 +1,112 @@
+<div class="malkar-menu-desktop malkar-menu-container" role="menu">
+  <a #info
+        [ngClass]="getClasses(malkarPages.info)"
+        id="info" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.info" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.info]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Malkar_Info}}
+  </a>
+  <a #documents
+        [ngClass]="getClasses(malkarPages.documents)"
+        id="documents" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.documents" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.documents]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Documents_and_Reports}}
+  </a>
+  <a #people
+        [ngClass]="getClasses(malkarPages.people)" 
+        id="people" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.people" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.people]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Malkar_people}}
+  </a>
+  <a #govSupport
+        [ngClass]="getClasses(malkarPages.govsupport)"
+        id="govsupport" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.govsupport" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.govsupport]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Government_Support}}
+  </a>
+  <a #donations
+        [ngClass]="getClasses(malkarPages.donations)" 
+        id="donations" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.donations" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.donations]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Donations}}
+  </a>
+  <a #govServices
+        [ngClass]="getClasses(malkarPages.govservices)" 
+        id="govservices" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.govservices" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.govservices]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Services}}
+  </a>    
+  <a #volunteering
+        [ngClass]="getClasses(malkarPages.volunteering)" 
+        id="volunteering" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.volunteering" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.volunteering]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Volunteering}}
+  </a> 
+  <a #contact
+        [ngClass]="getClasses(malkarPages.contact)" 
+        id="contact" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.contact" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.contact]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Contact_us}}
+  </a>
+  <a #assets
+        [ngClass]="getClasses(malkarPages.assets)" 
+        id="assets" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.assets" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.assets]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Assets}}
+  </a>
+  <a #trustees
+        [ngClass]="getClasses(malkarPages.trustees)" 
+        id="trustees" 
+        *ngIf="!menuItemHideMap || !menuItemHideMap.trustees" 
+        [routerLink]="['/', pages.malkar, malkarNum, malkarPages.trustees]" 
+        (click)="menuClicked($event)" 
+        (keydown.Enter)="enterHit($event)" 
+        tabindex="0" 
+        role="menuitem">
+    {{$Label.Trustees}}
+  </a>
+</div>

@@ -1,0 +1,126 @@
+<div class="contact-us-wrapper">
+  <h1 class="contact-heading">
+    {{$Label.Make_contact}}
+  </h1>
+  <div class="contact-us-content">
+    <div class="contact-main-content">
+      <div class="contact-explanation" *ngIf="mainContent">
+        <!--<div class="contact-text-section" *ngFor="let content of mainContentBody" [innerHtml]="content | safeHtml"></div>-->
+        <app-main-content *ngFor="let content of mainContent; let first=first;" [content]="content" [hideTitle]="first"></app-main-content>
+      </div>
+      <div class="screenreader-only" role="status" aria-atomic="true" aria-live="polite" aria-relevant="all">
+        <div *ngIf="contactForm">
+          <div id="errorNoName" *ngIf="contactForm.get('name').errors && (contactForm.get('name').dirty || isButtonClicked) && contactForm.get('name').errors['required']" >{{$Label.Please_fill_field}} {{$Label.Name}}</div>
+          <div id="errorNoPhone" *ngIf="contactForm.get('phone').errors && (contactForm.get('phone').dirty || isButtonClicked) && contactForm.get('phone').errors['required']" >{{$Label.Please_fill_field}} {{$Label.Telephone}}</div>
+          <div id="errorInvPhone" *ngIf="contactForm.get('phone').errors && (contactForm.get('phone').dirty || isButtonClicked) && (contactForm.get('phone').errors['pattern'] || contactForm.get('phone').errors['minLength'])" >{{$Label.Please_fill_field}} {{$Label.Telephone}} {{$Label.Valid}}</div>
+          <div id="errorNoEmail" *ngIf="contactForm.get('email').errors && (contactForm.get('email').dirty || isButtonClicked) && contactForm.get('email').errors['required']" >{{$Label.Please_fill_field}} {{$Label.Email}}</div>
+          <div id="errorInvEmail" *ngIf="contactForm.get('email').errors && (contactForm.get('email').dirty || isButtonClicked) && contactForm.get('email').errors['pattern']" >{{$Label.Please_fill_field}} {{$Label.Email}} {{$Label.Valid}}</div>
+          <div id="errorNoSubject" *ngIf="contactForm.get('subject').errors && (contactForm.get('subject').dirty || isButtonClicked) && (contactForm.controls['subject'].value == null || contactForm.get('subject').errors['required'])" >{{$Label.Please_fill_field}} {{$Label.Subject}}</div>
+          <div id="errorNoCaptcha" *ngIf="(!captchaToken || isCaptchaExpired) && isButtonClicked">{{$Label.Submit_captcha}}</div>
+        </div>
+      </div>
+      <div [ngStyle]="{'display' : !upsertStatus ? 'block' : 'none'}">
+        <form [formGroup]="contactForm" novalidate class="contact-form">
+          <fieldset class="contact-input-wrapper">
+            <legend class="contact-field-label">{{$Label.Name}}<span class="contact-required-star">&nbsp;*</span></legend>          
+            <input 
+                  formControlName="name" 
+                  [attr.aria-label]="$Label.Name"
+                  aria-required="true"
+                  [ngClass]="contactForm.get('name').errors && (contactForm.get('name').dirty || isButtonClicked) ? 'contact-input input-error' : 'contact-input'"
+                  [attr.aria-describedby]="contactForm.get('name').errors && (contactForm.get('name').dirty || isButtonClicked) && contactForm.get('name').errors['required'] ? 'errorNoName' : ''"
+                  >
+            <div class="contact-errors" *ngIf="contactForm.get('name').errors && (contactForm.get('name').dirty || isButtonClicked)">
+              <div *ngIf="contactForm.get('name').errors['required']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Name}}</div>
+            </div>
+          </fieldset>
+          <fieldset class="contact-input-wrapper">
+            <legend class="contact-field-label">{{$Label.Telephone}}<span class="contact-required-star">&nbsp;*</span></legend>
+            <input 
+                  type="tel"
+                  formControlName="phone" 
+                  [attr.aria-label]="$Label.Telephone"
+                  aria-required="true"
+                  [ngClass]="contactForm.get('phone').errors && (contactForm.get('phone').dirty || isButtonClicked) ? 'contact-input contact-input-tel ltr input-error' : 'contact-input contact-input-tel'"
+                  [attr.aria-describedby]="contactForm.get('phone').errors && (contactForm.get('phone').dirty || isButtonClicked) && contactForm.get('phone').errors['required'] ? 'errorNoPhone' : ''"
+                  >
+            <div class="contact-errors" *ngIf="contactForm.get('phone').errors && (contactForm.get('phone').dirty || isButtonClicked)">
+              <div *ngIf="contactForm.get('phone').errors['required']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Telephone}}</div>
+              <div *ngIf="contactForm.get('phone').errors['pattern'] || contactForm.get('phone').errors['minLength']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Telephone}} {{$Label.Valid}}</div>
+            </div>
+          </fieldset>
+          <fieldset class="contact-input-wrapper">
+            <legend class="contact-field-label">{{$Label.Email}}<span class="contact-required-star">&nbsp;*</span></legend>
+            <input 
+                  type="email" 
+                  formControlName="email" 
+                  [attr.aria-label]="$Label.Email"
+                  aria-required="true"
+                  [ngClass]="contactForm.get('email').errors && (contactForm.get('email').dirty || isButtonClicked) ? 'contact-input ltr input-error' : 'contact-input ltr'"
+                  [attr.aria-describedby]="contactForm.get('email').errors && (contactForm.get('email').dirty || isButtonClicked) && contactForm.get('email').errors['required'] ? 'errorNoEmail' : ''"
+                  >
+            <div class="contact-errors" *ngIf="contactForm.get('email').errors && (contactForm.get('email').dirty || isButtonClicked)">
+              <div *ngIf="contactForm.get('email').errors['required']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Email}}</div>
+              <div *ngIf="contactForm.get('email').errors['pattern']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Email}} {{$Label.Valid}}</div>
+            </div>
+          </fieldset>
+          <fieldset class="contact-input-wrapper contact-picklist-wrapper" >
+            <legend class="contact-field-label">{{$Label.Subject}}<span class="contact-required-star">&nbsp;*</span></legend>
+            <app-picklist
+                [valueList]="subjectOptions"
+                [itemsContainerStyle]="{'max-height': '10em'}"
+                [inputStyle]="{'border': '1px solid #798c95', 'margin':' 0.5em 0 0 0'}"
+                [placeholder]="$Label.Choose"
+                [parentFormGroup]="contactForm"
+                [controlName]="'subject'"
+                [required]="true"
+                [errorStyle]="{'border': contactForm.controls['subject'].value == null || (isButtonClicked && contactForm.controls['subject'].errors) ? '2px solid #e4100b' : '1px solid #798c95'}"
+                >
+            </app-picklist>
+            <div class="contact-errors" *ngIf="contactForm.get('subject').errors && (contactForm.get('subject').dirty || isButtonClicked)">
+              <div *ngIf="contactForm.controls['subject'].value == null || contactForm.get('subject').errors['required']" aria-live="polite">{{$Label.Please_fill_field}} {{$Label.Subject}}</div>
+            </div>
+          </fieldset>
+          <fieldset class="contact-input-wrapper-wide">
+            <legend class="contact-field-label">{{$Label.Message}}</legend>
+            <textarea [attr.aria-label]="$Label.Message" class="contact-textarea" formControlName="body"></textarea>
+          </fieldset>
+          <div class="contact-input-wrapper-wide">
+            <div class="contact-captcha" [ngStyle]="{'border': (!captchaToken || isCaptchaExpired) && isButtonClicked ? '2px solid #e4100b' : 'none'}">
+              <re-captcha [site_key]="googleRecaptchaPublicKey" 
+                (captchaResponse)="handleCorrectCaptcha($event)" 
+                (captchaExpired)="captchaExpired()">
+              </re-captcha>
+            </div>
+            <div class="contact-errors" *ngIf="(!captchaToken || isCaptchaExpired) && isButtonClicked">
+              {{$Label.Submit_captcha}}
+            </div>
+          </div>
+          <div class="contact-input-wrapper-wide contact-submit-button">
+            <button (click)="submitCase()" [innerHtml]="Id.value ? $Label.Update : $Label.Send ">
+            </button>
+          </div>       
+        </form>
+      </div>
+      <!--{{upsertStatus | json}}-->
+      <!--<app-loader [showLoader]="upsertStatus === 'loading...'"></app-loader>-->
+      <!--<div *ngIf="upsertErrors">
+        <div>{{$Label.Error_submit_case}}</div>
+      </div>-->
+      <div [ngStyle]="{'display' : upsertStatus ? 'flex' : 'none'}" class="case-messages">
+        <app-loader [showLoader]="upsertStatus === 'loading...'"></app-loader>
+        <img *ngIf="upsertErrors || upsertStatus === 'success'" class="case-message-icon" [src]="getBackgroundImageUrl(getCaseMEssageIcon())"/>
+        <div *ngIf="upsertErrors" class="upsert-error-box">
+          <div>{{$Label.Error_submit_case}}</div>
+          <div class="resubmit-case" (click)="resubmitCase()"> {{$Label.Resubmit_case}}</div>
+        </div>
+        <div *ngIf="upsertStatus === 'success'" class="upsert-success-box">
+          <div>{{$Label.Case_Accepted}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-side-panel">
+      <app-side-content *ngFor="let content of sideContent" [content]="content"></app-side-content>
+    </div> 
+  </div>
+</div>

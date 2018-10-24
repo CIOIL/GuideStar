@@ -1,0 +1,95 @@
+<div class="malkar-contact-container">
+  <div class="malkar-contact-content-container">
+    <div class="malkar-contact-content">
+      <h2>{{$Label.Contact_us}}</h2>
+      <div class="malkar-contact-content-wrapper">
+        <div class="malkar-contact-section malkar-mobile-small">
+          {{$Label.Malkar_info_disclaimer_short}}
+        </div>
+        <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.description">
+          <h3 *ngIf="malkarData.greenInfo && malkarData.greenInfo.description"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.General_description}}</h3>
+          <long-text class="malkar-mobile-small" [minHeight]="'3em'" [showSmallButton]="true" [htmlBody]="malkarData.greenInfo.description" [scrollOffset]="205"></long-text>
+        </div>
+        <div class="malkar-contact-section" *ngIf="getMalkarAddress(malkarData)">
+          <h3 *ngIf="malkarData && (getMalkarAddress(malkarData) || getMalkarActivityArea(malkarData, $Label['Search_National']) || getMalkarActivityPlaces(malkarData))"><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Official_address}}</h3>
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarAddress(malkarData)" [label]="$Label.Address" [value]="getMalkarAddress(malkarData)"></app-label-value>
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarActivityArea(malkarData, $Label['Search_National'])" [label]="$Label.Activities_area" [value]="getMalkarActivityArea(malkarData, $Label['Search_National']) | stringifyList"></app-label-value>
+          <app-label-value [customStyle]="getLabelValueStyle()" *ngIf="getMalkarActivityPlaces(malkarData)" [label]="$Label.Activity_Places" [value]="getMalkarActivityPlaces(malkarData) | stringifyList"></app-label-value>
+        </div>
+        <div class="malkar-contact-info">
+          <div class="malkar-contact-section" *ngIf="getAddress()">
+            <img class="media-icon" [src]="getBackgroundImageUrl(iconAddress)" alt="website icon" aria-hidden="true"/>
+            <span class="malkar-contact-detail" [innerHtml]="getAddress()"></span>
+          </div>
+          <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.phoneNumbers && malkarData.greenInfo.phoneNumbers.length > 0">
+            <div class="malkar-contact-phone-wrapper">
+              <img class="media-icon" [src]="getBackgroundImageUrl(iconPhone)" alt="phone icon" aria-hidden="true"/>
+              <div class="malkar-contact-phone-num-wrapper">
+                <div class="malkar-contact-detail malkar-contact-phone" *ngFor="let num of malkarData.greenInfo.phoneNumbers">
+                  <a [href]="'tel:'+num">{{num}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.email">
+            <img class="media-icon" [src]="getBackgroundImageUrl(iconEmail)" alt="email icon" aria-hidden="true"/>
+            <span class="malkar-contact-detail"><a [href]="'mailto:'+malkarData.greenInfo.email">{{malkarData.greenInfo.email}}</a></span>
+          </div>
+        </div>
+        <div class="malkar-contact-web">
+          <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.websiteUrl">
+            <a [href]="malkarData.greenInfo.websiteUrl" target="blank">
+              <img class="media-icon" [src]="getBackgroundImageUrl(iconWebsite)" [attr.alt]="$Label.Website" aria-hidden="true"/>
+              &nbsp;{{$Label.Website}}
+            </a>
+          </div>
+          <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.facebookUrl">
+            <a [href]="malkarData.greenInfo.facebookUrl" target="blank">
+              <img class="media-icon" [src]="getBackgroundImageUrl(iconFacebook)" [attr.alt]="$Label.Facebook" aria-hidden="true"/>
+              &nbsp;{{$Label.Facebook}}
+            </a>
+          </div>
+          <div class="malkar-contact-section" *ngIf="malkarData.greenInfo && malkarData.greenInfo.youtubeUrl">
+            <a [href]="malkarData.greenInfo.youtubeUrl" target="blank">
+              <img class="media-icon" [src]="getBackgroundImageUrl(iconYoutube)" [attr.alt]="$Label.Youtube" aria-hidden="true"/>
+              &nbsp;{{$Label.Youtube}}
+            </a>
+          </div>
+        </div>
+        <div class="malkar-contact-web malkar-contact-web-2">
+          <app-linker *ngIf="malkarData.greenInfo && malkarData.greenInfo.donationUrl"
+                      class="malkar-content-external-link"
+                      [label]="$Label.Donation_info" 
+                      [link]="malkarData.greenInfo.donationUrl" 
+                      [type]="'link'" 
+                      [newTab]="true"></app-linker>
+          <app-linker *ngIf="malkarData.greenInfo && malkarData.greenInfo.volunteeringUrl"
+                      class="malkar-content-external-link"
+                      [label]="$Label.Volunteering_info" 
+                      [link]="malkarData.greenInfo.volunteeringUrl" 
+                      [type]="'link'" 
+                      [newTab]="true"></app-linker>
+        </div> 
+      </div>
+  </div>
+    <div class="malkar-contact-side" aria-hidden="true">
+      <div *ngIf="false && malkarData">
+        <h3><i class="h3-vertical-bar">&nbsp;|&nbsp;</i>{{$Label.Activity_Places}}</h3>
+        <agm-map  [fitBounds]="latlngBounds" [latitude]="mapCenterLat" [longitude]="mapCenterLng" [fullscreenControl]="true" [zoom]="14" [mapTypeControl]="true">
+          <agm-marker-cluster [imagePath]="getBackgroundImageUrl('assets/img/cluster/m')">
+            <agm-marker [latitude]="malkarData.lat" [longitude]="malkarData.lng">
+              <agm-info-window *ngIf="malkarData.geolocationDescription">
+                <strong>{{malkarData.geolocationDescription}}</strong>
+              </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngFor="let malkarCity of malkarData.malkarCities" [latitude]="malkarCity.lat" [longitude]="malkarCity.lng">
+              <agm-info-window *ngIf="malkarCity.description">
+                <strong>{{malkarCity.description}}</strong>
+              </agm-info-window>
+            </agm-marker>
+          </agm-marker-cluster>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

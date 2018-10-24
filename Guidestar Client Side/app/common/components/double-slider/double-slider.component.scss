@@ -1,0 +1,58 @@
+@import "../../../../assets/scss/params.scss";
+$custom-popover-min-width: 7em;
+$custom-popover-offset-left: 2.5em;
+@import "../../../../assets/scss/custom-popover.scss";
+
+.bootstrap-slider-container{
+  direction: ltr;
+  padding-right: 0.6em;
+}
+.slider.slider-horizontal {
+  width: 100%;
+}
+.slider.slider-horizontal .slider-track {
+  height: 0.125em;
+  border-radius: 0;
+}
+.slider-track-low, .slider-track-high {
+  height: 0.125em;
+  top: 0;
+  border-radius: 0;
+  bottom: 0;
+  background-color: $double-slider-color-inactive;
+}
+.slider.slider-horizontal .slider-selection {
+  background-image: none ;
+  box-shadow: none ;
+  border-radius: 0;
+  background-color: $double-slider-color-active ;
+}
+.slider-handle {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  box-sizing: border-box;
+  top: -0.125em;
+  width: 1em;
+  height: 1em;
+  background-color: $double-slider-handle-color;
+  background-image: none ;
+  box-shadow: none ;
+  border: 1px white solid;
+  cursor: pointer;
+}
+
+.double-slider-handle-value{
+  top: 1.4em;
+  position: relative;
+  font-size: 0.875em;
+  white-space: nowrap;
+  background-color: $background-color;
+  padding: 0 0.125em 0 0.125em;
+  height: 1.1em;
+}
+.double-slider-values{
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}

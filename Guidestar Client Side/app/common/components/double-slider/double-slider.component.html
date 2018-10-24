@@ -1,0 +1,15 @@
+<div #doubleSliderContainer class="bootstrap-slider-container" [formGroup]="parentFormGroup" >
+<input 
+      [id]="sliderId"
+      type="text" 
+      class="span2" 
+      [attr.data-slider-min]="minValue" 
+      [attr.data-slider-max]="maxValue" 
+      data-slider-step="1" 
+      [formControlName]="controlName"
+      />
+</div>
+<div *ngIf="displayValues" aria-atomic="true" role="option" aria-live="polite" class="double-slider-values" >{{$Label.From}}: {{displayValues[0]}} {{$Label.To}}: {{displayValues[1]}}</div>
+
+<!--role="option" aria-live="polite" aria-atomic="true"-->
+<!--role="slider"-->

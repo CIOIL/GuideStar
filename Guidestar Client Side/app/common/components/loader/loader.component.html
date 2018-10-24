@@ -1,0 +1,11 @@
+<div class="loader-container" 
+      [style.position]="position" 
+      [style.top]="top" 
+      [style.left]="left"
+      [style.zIndex]="zIndex">
+  <div *ngIf="showLoader" class="loader-circle loader-circle1"></div>
+  <div *ngIf="showLoader" class="loader-circle loader-circle2"></div>
+  <div *ngIf="showLoader" class="loader-circle loader-circle3"></div>
+</div>
+<!--[@expandCollapse]="{value: showLoader, params:{min_height: minHeight}}"-->
+<!--[ngStyle]="{'height': showLoader ? '100%' : '0'}"-->

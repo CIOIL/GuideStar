@@ -1,0 +1,202 @@
+@import "../../../assets/scss/params.scss";
+
+h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: $malkar-info-h2-color;
+  border-right: 4px solid $malkar-info-h2-border-color;
+  padding: 0.25em 0.625em 0.25em 0;
+}
+h3{
+  font-size: 1.125em;
+  font-weight: bold;
+  color: $malkar-info-h3-color;
+}
+.h3-vertical-bar{
+  display: none;
+}
+
+.malkar-people-container{
+  width: 75%;
+}
+
+.malkar-people-content{
+  padding: 0 1.125em 0 0;
+}
+.malkar-people-info{
+  padding: 0.5em 0 0 0;
+}
+.malkar-people-section{
+  padding: 1em 0 1em 0;
+}
+.malkar-people-list-container{
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  overflow: hidden;
+  margin: 1em 0 0 0;
+}
+.malkar-people-list{
+  flex: 1;
+  min-width: 50%;
+  padding: 0 0 0.25em 0;
+}
+.malkar-people-section-expander{
+  border-bottom: 1px solid $table-row-border-color;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  cursor: pointer;
+  margin: 1em 0 0 0;
+}
+.malkar-people-section-expander-button{
+  position: relative;
+  width: 5.75em;
+  background-color: $menu-background-color;
+  color: $background-color;
+  font-weight: bold;
+  padding: 0.775em 0 0.4em 0;
+  text-align: center;
+  margin: 0 0 0 1.25em;
+}
+.malkar-people-section-expander-button:hover, .malkar-people-section-expander-button:focus{
+  background-color: $malkar-people-expand-button-hover-color;
+  border-bottom: 0.2em solid $long-text-underline-color;
+  padding-bottom: 0.2em;
+}
+.malkar-people-expand-button:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 2.36em;
+  border-right: 0.5em solid transparent;
+  border-left: 0.5em solid transparent;
+  border-top: 0.5em solid $background-color;
+}
+.malkar-people-collapse-button:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -0.5em;
+  left: 2.36em;
+  border-right: 0.5em solid transparent;
+  border-left: 0.5em solid transparent;
+  border-bottom: 0.5em solid $menu-background-color;
+}
+.malkar-people-collapse-button:hover:after, .malkar-people-collapse-button:focus:after{
+  border-bottom: 0.5em solid $malkar-people-expand-button-hover-color;  
+}
+.malkar-people-orgs-list{
+  flex: 1 0 44%;
+  min-width: 0;
+  // flex-basis: 50%;
+  padding: 0 0 0.25em 0;
+  margin: 0 0 0 2.5em;
+}
+.malkar-people-orgs-list,a{
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $link-color;//#167bad;
+  text-decoration: none;
+}
+a:hover, a:focus{
+  text-decoration: underline;
+}
+.malkar-people-tables{
+  margin: 1.5em 0 0 0;
+}
+
+.mobile-show{
+  display: none;
+}
+.desktop-show{
+  display: flex;
+}
+
+@media only screen and (min-width: 641px) and (max-width: 1024px){
+  .malkar-people-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 40.063em){
+  h2{
+    display: none;
+  }
+  .malkar-people-container{
+    width: 100%;
+  }
+  h3{
+    // border-right: 4px solid $malkar-detail-heading-divider-color;
+    // padding-right: 0.5em;
+    // margin-top: 0.75em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    font-size: 1em;
+    padding-top: 0.5em;
+    margin: 0;
+  }
+  .malkar-mobile-small{
+    font-size: 0.9em;
+  }
+  .h3-vertical-bar{
+    display: inline;
+    color: $home-charts-title-divider-color; 
+    font-style: normal;
+    font-size: 0.727272em;
+    padding: 0.25em 0 0 0;
+  }
+  .malkar-people-info{
+    padding: 0.5em 0.5em 0 0;
+  }
+  .malkar-people-content{
+    padding: 0 0.25em 0 0.25em;
+  }
+  .malkar-people-section{
+    padding: 0;//1em 0.75em 1em 0.75em;
+  }
+  .malkar-people-list{
+    min-width: 100%;
+    padding-right: 0.5em;
+  }
+  .malkar-people-orgs-list{
+    min-width: 100%;
+  }
+  .malkar-people-section-expander{
+    width: 100vw;
+    right: -0.8333em;
+    position: relative;
+  }
+  .malkar-people-section-expander-button{
+    margin: 0 0 0 0.5em;
+    width: 4em;
+    padding: 0.25em 0 0.2em 0;
+  }
+  .malkar-people-expand-button:after{
+    left: 1.55em;
+    border-right: 0.4em solid transparent;
+    border-left: 0.4em solid transparent;
+    border-top: 0.4em solid $background-color;
+  }
+  .malkar-people-collapse-button:after{
+    left: 1.55em;
+    top: -0.9em;
+    border-right: 0.4em solid transparent;
+    border-left: 0.4em solid transparent;
+    border-top: 0.4em solid $background-color;
+  }
+    .mobile-show{
+    display: flex;
+  }
+  .desktop-show{
+    display: none;
+  }
+}

@@ -1,0 +1,72 @@
+<div class="ts-container">
+  <h1>
+    {{$Label.Support_tests}}
+    <span *ngIf="testSupport && testSupport.OrganType" class="ts-organ-type"> - {{testSupport.OrganType}}</span>
+  </h1>
+  <h1 class="ts-mobile-organ-type" *ngIf="testSupport && testSupport.OrganType">{{testSupport.OrganType}}</h1>
+  <div class="ts-content-container" *ngIf="testSupport">
+    <div class="ts-main-content" >
+      <h2>{{testSupport.SupportName}}</h2>
+      <div class="ts-content-section">
+        <app-label-value *ngIf="testSupport.OrganType"
+          [label]="$Label.Gov_Office" 
+          [value]="testSupport.OrganType">
+        </app-label-value>
+      </div>
+      <div class="ts-content-section">
+        <app-label-value *ngIf="testSupport.DateCreated"
+          [label]="$Label.Date_published" 
+          [value]="testSupport.DateCreated"
+          [isDate]="true">
+        </app-label-value>
+      </div>
+      <div class="ts-content-section">
+        <app-label-value *ngIf="testSupport.DateUpdated"
+          [label]="$Label.Date_updated" 
+          [value]="testSupport.DateUpdated"
+          [isDate]="true">
+        </app-label-value>
+      </div>
+      <div class="ts-content-section">
+        <app-label-value *ngIf="testSupport.Budget"
+          [label]="$Label.Budget" 
+          [value]="testSupport.Budget">
+        </app-label-value>
+      </div>
+      <div class="ts-content-section" *ngIf="testSupport.Description">
+        {{testSupport.Description}}
+      </div>
+      <div class="ts-link-container">
+        <div class="ts-link">
+          <a [href]="testSupport.FileLink" target="_blank" [attr.aria-label]="$Label.Test_file + ' ' + testSupport.SupportName">
+            <!--<img class="linker-icon" [src]="getBackgroundImageUrl(pdfIcon)" alt="pdf icon" aria-hidden="true"/>-->
+            <img class="linker-icon" [src]="getBackgroundImageUrl(docIcon)" alt="doc icon" aria-hidden="true"/>
+            {{$Label.Test_file}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ts-side-content-container">
+      <div class="ts-side-header">
+        {{$Label.Additional_test_supports}}
+      </div>
+      <div class="ts-side-office" *ngIf="testSupport.OrganType">
+        {{testSupport.OrganType}}:
+      </div>
+      <div *ngIf="testSupport.LinkedTests">        
+        <div class="ts-linked-test" *ngFor="let test of testSupport.LinkedTests" [routerLink]="['/', 'test-support', test.value]">
+          <a [routerLink]="['/', 'test-support', test.value]">{{test.label}}</a>
+        </div>
+      </div>
+      <div class="ts-side-none" *ngIf="!testSupport.LinkedTests">
+        {{$Label.No_linked_tests}}
+      </div>
+      <div class="ts-side-button-container">
+        <div class="ts-side-button" (click)="findAllRelated()" (keydown.Enter)="findAllRelated()" tabindex="0" role="button" [attr.aria-label]="getMoreLabel()">
+          {{getMoreLabel()}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

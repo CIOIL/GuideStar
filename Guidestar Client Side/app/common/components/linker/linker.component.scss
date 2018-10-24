@@ -1,0 +1,31 @@
+// .linker-flex-class{
+//   display: flex;
+//   flex-flow: row wrap;
+// }
+// .linker-flex-class .linker-icon{
+//   margin: 0.3em 0 0 0.3em;
+// }
+
+.linker-container{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.linker-icon{
+  width: 16px;
+  height: 16px;
+  margin: 0 0 0 0.5em;
+  flex-shrink: 0;
+}
+
+@media only screen and (max-width: 40.0625em){
+  .linker-container{
+    align-items: flex-start;
+  }
+  .linker-icon{
+    width: 24px;
+    height: 24px;
+    padding: 0.2em 0 0 0;
+  }
+}
